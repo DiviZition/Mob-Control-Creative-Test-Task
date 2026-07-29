@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class Canon : MonoBehaviour
+public class Canon : MonoBehaviour, IDisablable
 {
     [SerializeField] private CanonShooter _shooter;
     [SerializeField] private CanonMovement _movement;
 
-    private void Start() => Activate();
+    private void Start() => Enable();
 
-    public void Activate()
+    public void Enable()
     {
         _shooter.enabled = true;
         _movement.enabled = true;
     }
-    public void DeActivate()
+
+    public void Disable()
     {
-        _shooter.enabled = true;
-        _movement.enabled = true;
+        _shooter.enabled = false;
+        _movement.enabled = false;
     }
 }

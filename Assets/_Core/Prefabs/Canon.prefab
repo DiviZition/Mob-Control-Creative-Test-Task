@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 4794639841371317736}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.646}
+  m_LocalPosition: {x: 0, y: -0.334, z: 0.646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,6 +426,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6609806487081574739}
+  - component: {fileID: 4503073894411850462}
+  - component: {fileID: 7214565795849746220}
+  - component: {fileID: 2445793064285913879}
   m_Layer: 0
   m_Name: Canon
   m_TagString: Untagged
@@ -450,6 +453,57 @@ Transform:
   - {fileID: 4635141839827727779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4503073894411850462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718359030996178488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58ec8d542c69cf4388a15775f17d8af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Canon
+  _shooter: {fileID: 2445793064285913879}
+  _movement: {fileID: 7214565795849746220}
+--- !u!114 &7214565795849746220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718359030996178488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfba3d69b3b691449e31050c972d3ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CanonMovement
+  _moveSpeed: 5
+  _wheelsRotationSpeed: 1500
+  _moveAcceleration: 6
+  _moveBounds: 1.5
+  _canonTransform: {fileID: 6609806487081574739}
+  _wheels:
+  - {fileID: 1795360970046713712}
+  - {fileID: 2712707304446694223}
+  - {fileID: 8898790438246164690}
+  - {fileID: 8746091662091063468}
+--- !u!114 &2445793064285913879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718359030996178488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d66e3320d906841b354c496a942ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CanonShooter
+  _unitSpawner: {fileID: 0}
+  _unitSpawnPoint: {fileID: 4635141839827727779}
+  _shootThreashold: 0.1
 --- !u!1001 &2139108395136385080
 PrefabInstance:
   m_ObjectHideFlags: 0
