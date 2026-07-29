@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1952020129158263946}
   - component: {fileID: 1800870386998688175}
+  - component: {fileID: 4729476376964053023}
+  - component: {fileID: 1210846089631104645}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -30,7 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7495928530551309089}
+  - {fileID: 4291959052868712154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1800870386998688175
@@ -46,7 +48,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitBase
   <Transform>k__BackingField: {fileID: 1952020129158263946}
---- !u!1001 &8037898622714995914
+  <UnitBattleSide>k__BackingField: 0
+  _movement: {fileID: 4729476376964053023}
+--- !u!114 &4729476376964053023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568578334628208978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f81d27d8876c5438f86290bc8fdb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitMovement
+  _agent: {fileID: 1210846089631104645}
+  _transform: {fileID: 1952020129158263946}
+  _moveSpeed: 3
+--- !u!195 &1210846089631104645
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568578334628208978}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.055
+  m_Speed: 3.5
+  m_Acceleration: 15
+  avoidancePriority: 50
+  m_AngularSpeed: 270
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 0
+  m_AutoRepath: 0
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 2
+--- !u!1001 &4330953734684119345
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -94,21 +135,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -1316336446891588881, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
       propertyPath: m_Name
       value: LowPoly_Stickaman_Running
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 836c4733e94b464448ecf64f83c68408, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
---- !u!4 &7495928530551309089 stripped
+--- !u!4 &4291959052868712154 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
-  m_PrefabInstance: {fileID: 8037898622714995914}
+  m_PrefabInstance: {fileID: 4330953734684119345}
   m_PrefabAsset: {fileID: 0}

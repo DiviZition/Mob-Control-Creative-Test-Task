@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -36,7 +38,8 @@ public class UnitSpawner : MonoBehaviour
 
     private void CreateNewUnit()
     {
-        IPoolable newUnit = MonoBehaviour.Instantiate(_unitPrefab, _unitsContainer);
+        UnitBase newUnit = MonoBehaviour.Instantiate(_unitPrefab, _unitsContainer);
+        newUnit.DeactivatePoolable();
         _deactivatedUnitsPool.Push(newUnit);
     }
 }
