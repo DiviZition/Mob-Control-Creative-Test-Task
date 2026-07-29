@@ -19,7 +19,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -38,35 +38,56 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Mask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 0}
+        m_Offset: {x: 0, y: 0}
+    - _Mask3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _DepthAlpha: 0.04
-    - _DepthMinAlpha: 0.29
+    - _DepthAlpha: 0.01
+    - _DepthDistance: 0.7
+    - _DepthMinAlpha: 0.415
     - _DstBlendTCP2: 10
+    - _EmisPulseMin: 0
+    - _EmisPulseSpeed: 2
     - _FoamSmooth: 0
-    - _FoamSpread: 2
-    - _FoamStrength: 0.8
-    - _RampSmooth: 0.1
-    - _RampThreshold: 0.5
-    - _ReflRoughness: 0
-    - _ReflStrength: 1
-    - _RimMax: 1
-    - _RimMin: 0.5
-    - _Shininess: 0.1
+    - _FoamSpread: 1.95
+    - _FoamStrength: 0.372
+    - _RampSmooth: 0.236
+    - _RampThreshold: 0.23
+    - _ReflRoughness: 0.142
+    - _ReflStrength: 0.175
+    - _RimMax: 0.131
+    - _RimMin: 0.705
+    - _Shininess: 1.2
     - _SrcBlendTCP2: 5
-    - _WaveFrequency: 1
-    - _WaveHeight: 0.1
+    - _UVWaveAmplitude: 0.162
+    - _UVWaveFrequency: 1.91
+    - _UVWaveSpeed: 2.24
+    - _WaveFrequency: 8.63
+    - _WaveHeight: 0.01
     - _WaveSpeed: 2
     - __dummy__: 0
     m_Colors:
-    - _BumpSpeed: {r: 0.2, g: 0.2, b: 0.3, a: 0.3}
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _BumpSpeed: {r: 4.28, g: 2.96, b: 3.03, a: 2.05}
+    - _Color: {r: 0.65959656, g: 0.36832502, b: 0.8773585, a: 1}
+    - _DepthColor: {r: 0.6055283, g: 0.5773852, b: 0.7075472, a: 0.57254905}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 0}
     - _FoamColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    - _FoamSpeed: {r: 3.02, g: 3.31, b: 5.6, a: 4.1}
-    - _HColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
-    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _FoamSpeed: {r: 0, g: 2.22, b: 0, a: 0}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskedColor: {r: 1, g: 0, b: 0, a: 1}
+    - _RimColor: {r: 0.76405495, g: 0.45056072, b: 0.764151, a: 0}
+    - _SColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecColor: {r: 0.7453678, g: 0.6148096, b: 0.8301887, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
