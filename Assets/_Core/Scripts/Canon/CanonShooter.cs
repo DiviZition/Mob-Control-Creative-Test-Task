@@ -1,9 +1,11 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CanonShooter : MonoBehaviour
 {
     [SerializeField] private UnitSpawner _unitSpawner;
+    [SerializeField] private MMF_Player _shootEffect;
     [SerializeField] private Transform _unitSpawnPoint;
     [SerializeField] private float _shootThreashold = 0.1f;
 
@@ -13,6 +15,9 @@ public class CanonShooter : MonoBehaviour
     {
         if (Keyboard.current.spaceKey.isPressed == true && _nextTimeShotAvailable < Time.time)
         {
+            _shootEffect.ResetFeedbacks();
+            _shootEffect.RestoreInitialValues();
+            _shootEffect.PlayFeedbacks();
             _unitSpawner.SpawnUnit(_unitSpawnPoint.position, _unitSpawnPoint.localRotation);
             _nextTimeShotAvailable = Time.time + _shootThreashold;
         }

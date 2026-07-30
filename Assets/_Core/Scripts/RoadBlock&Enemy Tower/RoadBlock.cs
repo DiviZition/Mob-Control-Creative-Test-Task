@@ -1,8 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-
-
 
 public class RoadBlock : MonoBehaviour, IDamageable
 {
@@ -12,8 +9,9 @@ public class RoadBlock : MonoBehaviour, IDamageable
     [SerializeField] private TMP_Text _counterText;
 
     public int CurrentHealth {  get; private set; }
+    public bool ReturnsDamage => true;
 
-    private void Start()
+    protected virtual void Start()
     {
         CurrentHealth = MaxHealth;
         UpdateCounter();
@@ -21,7 +19,7 @@ public class RoadBlock : MonoBehaviour, IDamageable
 
     private void UpdateCounter() => _counterText.text = CurrentHealth.ToString();
 
-    public void TakeDamage(int damage, IDamageable damageDealler)
+    public void TakeDamage(int damage)
     {
         if (CurrentHealth - damage < 0)
         {
@@ -31,13 +29,12 @@ public class RoadBlock : MonoBehaviour, IDamageable
         else
         {
             CurrentHealth -= damage;
-            damageDealler.TakeDamage(damage, this);
         }
 
         UpdateCounter();
     }
 
-    private void RemoveRoadBlock()
+    protected virtual void RemoveRoadBlock()
     {
         Destroy(this.gameObject);
     }

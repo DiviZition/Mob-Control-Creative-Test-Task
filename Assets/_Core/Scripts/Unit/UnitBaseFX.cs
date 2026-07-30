@@ -5,13 +5,14 @@ using UnityEngine;
 public class UnitBaseFX : MonoBehaviour
 {
     [SerializeField] private Transform _unitViewTransform;
+    //TODO: Consider global VXF pool for optimization if needed
     [SerializeField] private ParticleSystem _spawnVFX;
 
+    [Header("DeadFx settings")]
     [SerializeField] private Material _normalMaterial;
     [SerializeField] private Material _deadMaterial;
     [SerializeField] private SkinnedMeshRenderer _unitMeshRenderer;
-    [SerializeField] private Vector3 _dyingRotation;
-    //TODO: Consider global VXF pool for optimization if needed
+
     private Vector3 _unitViewPosition;
     private Quaternion _unitViewRotation;
     private Sequence _deadFxSequence;
@@ -22,16 +23,13 @@ public class UnitBaseFX : MonoBehaviour
         _unitViewRotation = _unitViewTransform.localRotation;
     }
 
-    public void PlaySpawnVFX()
-    {
-        _spawnVFX.Play();
-    }
+    public void PlaySpawnVFX() => _spawnVFX.Play();
 
     public void PlayDeadFx(Action onFXFinished)
     {
         _unitMeshRenderer.material = _deadMaterial;
         _deadFxSequence = Sequence.Create()
-            .Group(Tween.Rotation(_unitViewTransform, _dyingRotation, duration: 0.7f))
+            .Group(Tween.Rotation(_unitViewTransform, new Vector3(-60, 20, 45), duration: 0.7f))
             .Group(Tween.Position(_unitViewTransform, _unitViewTransform.position - Vector3.up * 0.2f, duration: 0.7f))
             .Group(Tween.Delay(duration: 0.5f, () => onFXFinished?.Invoke()));
     }

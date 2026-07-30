@@ -13,6 +13,7 @@ public class UnitBase : MonoBehaviour, IPoolable
 
     [SerializeField] private UnitHealth _health;
     [SerializeField] private UnitDamageDealer _damageDealer;
+    [SerializeField] private Collider _collider;
 
     private UnitSpawner _spawner;
 
@@ -22,12 +23,14 @@ public class UnitBase : MonoBehaviour, IPoolable
         Movement.Enable();
         FX.ResetToNormal();
         this.gameObject.SetActive(true);
+        _collider.enabled = true;
         FX.PlaySpawnVFX();
     }
 
     public void DeactivatePoolable()
     {
         Movement.Disable();
+        SetGateToIgnore(null);
         this.gameObject.SetActive(false);
     }
 
@@ -38,6 +41,7 @@ public class UnitBase : MonoBehaviour, IPoolable
     private void OnDead()
     {
         Movement.Disable();
+        _collider.enabled = false;
         Action onFXEnd = () => _spawner.DeactivateUnit(this);
         FX.PlayDeadFx(onFXEnd);
     }
@@ -64,7 +68,9 @@ public interface IDamageable
 {
     public int MaxHealth { get; }
     public int CurrentHealth { get; }
+
+    public bool ReturnsDamage { get; }
     public UnitBattleSide BattleSide { get; }
 
-    public void TakeDamage(int damage, IDamageable damageDealler);
+    public void TakeDamage(int damage);
 }

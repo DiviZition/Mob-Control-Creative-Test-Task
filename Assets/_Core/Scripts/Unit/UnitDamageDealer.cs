@@ -16,7 +16,11 @@ public class UnitDamageDealer : MonoBehaviour
 
         if (other.TryGetComponent(out IDamageable damageable) && damageable.BattleSide == _whoToAttack)
         {
-            damageable.TakeDamage(_damage, _unitHealth);
+            damageable.TakeDamage(_damage);
+
+            if (damageable.ReturnsDamage == true)
+                _unitHealth.TakeDamage(_damage);
+
             _nextAttackAvailable = Time.time + _attackCoolDown;
         }
     }
