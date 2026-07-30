@@ -135,7 +135,7 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 481198654438768896
+  - rid: 481198654438768902
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -147,11 +147,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 481198654438768896
+    - rid: 481198654438768902
       type: {class: MMF_Scale, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: 710459484
+        UniqueID: -208728386
         Label: Scale
         OriginalLabel: Scale
         ChannelMode: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
           NumberOfRepeats: 0
           RepeatForever: 0
           DelayBetweenRepeats: 1
-          PlayCount: 0
+          PlayCount: 392
           LimitPlayCount: 0
           MaxPlayCount: 3
           SetPlayCountToZeroOnReset: 0
@@ -239,29 +239,29 @@ MonoBehaviour:
             - serializedVersion: 3
               time: 0
               value: 0
-              inSlope: 12.125121
-              outSlope: 12.125121
+              inSlope: 5.0609193
+              outSlope: 5.0609193
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
-              outWeight: 0.06666532
+              outWeight: 0.040882744
             - serializedVersion: 3
-              time: 0.12500253
-              value: 0.9523673
-              inSlope: -5.1947746
-              outSlope: -5.1947746
+              time: 0.17466833
+              value: 0.36267418
+              inSlope: -1.6251454
+              outSlope: -1.6251454
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0.33333334
-              outWeight: 0.055000015
+              inWeight: 0.1210211
+              outWeight: 0.04583815
             - serializedVersion: 3
               time: 1
               value: 0
-              inSlope: -1.0884229
-              outSlope: -1.0884229
-              tangentMode: 34
+              inSlope: -0.049543202
+              outSlope: -0.049543202
+              tangentMode: 0
               weightedMode: 0
-              inWeight: 0.33333334
+              inWeight: 0.46477026
               outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -280,29 +280,29 @@ MonoBehaviour:
             - serializedVersion: 3
               time: 0
               value: 0
-              inSlope: 1.8085309
-              outSlope: 1.8085309
+              inSlope: 12.125121
+              outSlope: 12.125121
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
-              outWeight: 0.020833334
+              outWeight: 0.06666532
             - serializedVersion: 3
-              time: 0.14160116
-              value: 1.0072122
-              inSlope: -5.2644324
-              outSlope: -5.2644324
+              time: 0.09260702
+              value: 0.37703905
+              inSlope: -1.4499631
+              outSlope: -1.4499631
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0.07363743
-              outWeight: 0.07396334
+              inWeight: 0.16432402
+              outWeight: 0.058658496
             - serializedVersion: 3
               time: 1
               value: 0
-              inSlope: -0.013914321
-              outSlope: -0.013914321
+              inSlope: 0
+              outSlope: 0
               tangentMode: 0
               weightedMode: 0
-              inWeight: 0.26970854
+              inWeight: 0.37313682
               outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -362,7 +362,7 @@ MonoBehaviour:
           EnumConditionPropertyName: 
           EnumConditions: 0000000000000000000000000000000000000000000000000000000000000000
         UniformScaling: 0
-        AllowAdditivePlays: 0
+        AllowAdditivePlays: 1
         DetermineScaleOnPlay: 0
         DestinationScale: {x: 0.5, y: 0.5, z: 0.5}
         AnimateScaleX:
@@ -905,7 +905,7 @@ MonoBehaviour:
   _unitSpawner: {fileID: 0}
   _shootEffect: {fileID: 1964851037319793550}
   _unitSpawnPoint: {fileID: 4635141839827727779}
-  _shootThreashold: 0.1
+  _shootThreashold: 0.15
 --- !u!1001 &2139108395136385080
 PrefabInstance:
   m_ObjectHideFlags: 0
