@@ -5,6 +5,7 @@ public class UnitBase : MonoBehaviour, IPoolable, IDisablable
     [field: SerializeField] public Transform Transform { get; private set; }
     [field: SerializeField] public UnitBattleSide UnitBattleSide { get; private set; }
     [field: SerializeField] public UnitMovement Movement { get; private set; }
+    [field: SerializeField] public UnitBaseFX FX { get; private set; }
 
     [SerializeField] private UnitDamageDealer _damageDealer;
 
@@ -12,6 +13,7 @@ public class UnitBase : MonoBehaviour, IPoolable, IDisablable
     {
         Movement.ResetAgent();
         this.gameObject.SetActive(true);
+        FX.PlaySpawnVFX();
     }
 
     public void DeactivatePoolable()
