@@ -32,7 +32,7 @@ public class UnitTransporter : MonoBehaviour
 
     public void PlaceUnitInTube(UnitBase unit)
     {
-        unit.Disable();
+        unit.Movement.Disable();
         Tween.Position(unit.Transform, _enterPosition.position, duration: 0.5f, ease: Ease.OutCubic);
         Tween.Delay(duration: 0.3f, () => unit.gameObject.SetActive(false));
         Tween.Delay(duration: 0.5f, () => ScheduleUnitsOutput(unit));
@@ -69,8 +69,9 @@ public class UnitTransporter : MonoBehaviour
         _tubeExitFeedback.PlayFeedbacks();
         unitToOutput.Movement.WarpAgent(_exitPosition.position);
         unitToOutput.Movement.RotateUnit(_exitPosition.rotation);
+        unitToOutput.Movement.Enable();
+
         unitToOutput.gameObject.SetActive(true);
-        unitToOutput.Enable();
     }
 
     private void OnDestroy()

@@ -4848,6 +4848,7 @@ GameObject:
   - component: {fileID: 1800870386998688175}
   - component: {fileID: 4729476376964053023}
   - component: {fileID: 6031593575310502006}
+  - component: {fileID: 3732111550983527864}
   - component: {fileID: 1210846089631104645}
   - component: {fileID: 4196517174798622302}
   - component: {fileID: 8358381672451140918}
@@ -4891,6 +4892,7 @@ MonoBehaviour:
   <UnitBattleSide>k__BackingField: 0
   <Movement>k__BackingField: {fileID: 4729476376964053023}
   <FX>k__BackingField: {fileID: 6031593575310502006}
+  _health: {fileID: 3732111550983527864}
 --- !u!114 &4729476376964053023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4918,7 +4920,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d274d2cfb164d04191a1009b3061c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitBaseFX
+  _unitViewTransform: {fileID: 4291959052868712154}
   _spawnVFX: {fileID: 725943559012501089}
+  _normalMaterial: {fileID: 2100000, guid: 58146e955d87ef649945d2c3f3365f40, type: 2}
+  _deadMaterial: {fileID: 2100000, guid: 94533f8daf9ea6a4d9ba2138aec44893, type: 2}
+  _unitMeshRenderer: {fileID: 7866089676130923935}
+--- !u!114 &3732111550983527864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568578334628208978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f748c05f2d3fd549b1c1ac344df0e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitHealth
+  <MaxHealth>k__BackingField: 5
 --- !u!195 &1210846089631104645
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5037,6 +5056,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3372257567545154386, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 58146e955d87ef649945d2c3f3365f40, type: 2}
     - target: {fileID: 919132149155446097, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
       propertyPath: m_Name
       value: LowPoly_Stickaman_Running
@@ -5053,5 +5076,10 @@ PrefabInstance:
 --- !u!4 &4291959052868712154 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
+  m_PrefabInstance: {fileID: 4330953734684119345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7866089676130923935 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3372257567545154386, guid: 0bf003a2b574b1b46986af83df5bb5e6, type: 3}
   m_PrefabInstance: {fileID: 4330953734684119345}
   m_PrefabAsset: {fileID: 0}

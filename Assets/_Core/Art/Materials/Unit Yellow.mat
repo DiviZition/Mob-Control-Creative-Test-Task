@@ -7,16 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yellow
-  m_Shader: {fileID: 4800000, guid: f8d49205b3b0a644195633020367689d, type: 3}
+  m_Name: Unit Yellow
+  m_Shader: {fileID: 4800000, guid: fcaaec72afa364b8bab01163df0ee943, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - TCP2_DISABLE_WRAPPED_LIGHT
-  - TCP2_SPEC_TOON
-  - TCP2_STYLIZED_FRESNEL
-  m_InvalidKeywords: []
-  m_LightmapFlags: 0
+  - TCP2_RAMPTEXT
+  m_InvalidKeywords:
+  - OUTLINES
+  - TCP2_RIM
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -50,6 +50,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MatCap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,7 +67,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e932c54d6500f9c46b63c4d9d03387d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -72,35 +76,39 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0.12
+    - _DstBlendOutline: 10
+    - _GlossMapScale: 1
+    - _Glossiness: 0.133
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
+    - _Outline: 0.015
     - _Parallax: 0.02
-    - _RampSmooth: 0.382
-    - _RampSmoothAdd: 0.324
-    - _RampThreshold: 0
-    - _RimMax: 0.43
-    - _RimMin: 0.162
-    - _RimStrength: 0.5
+    - _RampSmooth: 0.02
+    - _RampThreshold: 0.418
+    - _RimMax: 0.448
+    - _RimMin: 0.12
+    - _Shininess: 0.67
     - _SmoothnessTextureChannel: 0
-    - _SpecBlend: 0.707
-    - _SpecSmooth: 0.225
+    - _SpecSmooth: 0.634
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _TCP2_DISABLE_WRAPPED_LIGHT: 1
-    - _TCP2_RAMPTEXT: 0
-    - _TCP2_SPEC_TOON: 1
-    - _TCP2_STYLIZED_FRESNEL: 1
+    - _SrcBlendOutline: 5
+    - _TexLod: 5
     - _UVSec: 0
+    - _ZSmooth: -0.5
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.990566, g: 0.8583065, b: 0.098122105, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.1509434, g: 0.14595942, b: 0.14595942, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
-    - _SColor: {r: 0.2924528, g: 0.20484415, b: 0.15036489, a: 1}
+    - _RimDir: {r: 0, g: 0, b: 1, a: 0}
+    - _SColor: {r: 0.41509432, g: 0.31829497, b: 0.26824492, a: 1}
+    - _SpecColor: {r: 0.17644843, g: 0.05762726, b: 0.3490566, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
