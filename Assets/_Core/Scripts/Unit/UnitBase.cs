@@ -7,6 +7,8 @@ public class UnitBase : MonoBehaviour, IPoolable, IDisablable
     [field: SerializeField] public UnitMovement Movement { get; private set; }
     [field: SerializeField] public UnitBaseFX FX { get; private set; }
 
+    public MultiplyingGate IgnoreGate { get; private set; }
+
     [SerializeField] private UnitDamageDealer _damageDealer;
 
     public void ActivatePoolable()
@@ -32,6 +34,8 @@ public class UnitBase : MonoBehaviour, IPoolable, IDisablable
         Movement.Disable();
         //_damageDealer.Disable();
     }
+
+    public void SetGateToIgnore(MultiplyingGate ignoreGate) => IgnoreGate = ignoreGate;
 }
 
 public enum UnitBattleSide

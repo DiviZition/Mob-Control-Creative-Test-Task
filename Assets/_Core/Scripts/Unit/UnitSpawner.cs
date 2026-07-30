@@ -11,14 +11,19 @@ public class UnitSpawner : MonoBehaviour
     private HashSet<IPoolable> _activeUnitsPool = new HashSet<IPoolable>(1024);
     private Stack<IPoolable> _deactivatedUnitsPool = new Stack<IPoolable>(1024);
 
-    public void SpawnUnit(Vector3 position, Quaternion rotation)
+    public UnitBase SpawnUnit(Transform reference, bool activateUnit = true) => SpawnUnit(reference.position, reference.localRotation, activateUnit);
+    public UnitBase SpawnUnit(Vector3 position, Quaternion rotation, bool activateUnit = true)
     {
         IPoolable unit = ExtractFreeUnit();
         unit.Transform.position = position;
         unit.Transform.localRotation = rotation;
 
         _activeUnitsPool.Add(unit);
-        unit.ActivatePoolable();
+        
+        if (activateUnit == true)
+            unit.ActivatePoolable();
+
+        return unit as UnitBase;
     }
 
     public void DeactivateUnit(UnitBase unit)
