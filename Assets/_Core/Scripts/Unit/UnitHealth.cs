@@ -10,7 +10,7 @@ public class UnitHealth : MonoBehaviour, IDamageable
 
     public event Action OnDead;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, IDamageable damageDealer)
     {
         if (CurrentHealth - damage <= 0)
         {

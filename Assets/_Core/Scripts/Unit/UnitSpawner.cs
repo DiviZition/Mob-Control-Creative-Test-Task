@@ -44,6 +44,7 @@ public class UnitSpawner : MonoBehaviour
     private void CreateNewUnit()
     {
         UnitBase newUnit = MonoBehaviour.Instantiate(_unitPrefab, _unitsContainer);
+        newUnit.SetUnitSpawner(this);
         newUnit.DeactivatePoolable();
         _deactivatedUnitsPool.Push(newUnit);
     }

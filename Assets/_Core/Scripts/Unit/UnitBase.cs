@@ -60,12 +60,11 @@ public enum UnitBattleSide
     Enemy,
 }
 
-internal interface IDamageable
+public interface IDamageable
 {
     public int MaxHealth { get; }
     public int CurrentHealth { get; }
     public UnitBattleSide BattleSide { get; }
-    public event Action OnDead;
 
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage, IDamageable damageDealler);
 }
