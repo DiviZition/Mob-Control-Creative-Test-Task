@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [SelectionBase]
-public class EnemyTower : RoadBlock
+public class EnemyTower : Damageable
 {
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
 
@@ -15,7 +15,7 @@ public class EnemyTower : RoadBlock
         _enemySpawning.StartSpawningEnemy();
     }
 
-    protected override void RemoveRoadBlock()
+    protected override void PerformDeath()
     {
 
     }
