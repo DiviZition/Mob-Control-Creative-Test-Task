@@ -9,6 +9,8 @@ public class EnemyTower : Damageable, IDisablable
 {
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
 
+    private void Start() => RestoreHealth();
+
     protected override void PerformDeath()
     {
         base.PerformDeath();

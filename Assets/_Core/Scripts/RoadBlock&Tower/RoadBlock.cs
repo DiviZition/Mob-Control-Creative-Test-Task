@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RoadBlock : Damageable, IDisablable
 {
+    private void Start() => Enable();
+
     protected override void PerformDeath()
     {
         base.PerformDeath();

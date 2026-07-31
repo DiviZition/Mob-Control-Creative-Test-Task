@@ -6,8 +6,6 @@ public class PlayerTower : Damageable, IDisablable
     [SerializeField] private CanonShooter _canonShooter;
     [SerializeField] private Collider _collider;
 
-    private void Awake() => Disable();
-
     public void Enable()
     {
         RestoreHealth();

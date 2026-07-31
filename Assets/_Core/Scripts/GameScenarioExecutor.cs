@@ -9,7 +9,6 @@ public class GameScenarioExecutor : MonoBehaviour
 
     public void SetScenario(GameScenario newScenario) => _scenario = newScenario;
     [ContextMenu("Run Scenarion")]
-    public void RestartScenario()
     public void RunScenario()
     {
         _uiSystem.HideAllScreens();
