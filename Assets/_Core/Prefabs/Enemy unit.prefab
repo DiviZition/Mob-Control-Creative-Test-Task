@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: _collider
       value: 
       objectReference: {fileID: 1983088410953089862}
+    - target: {fileID: 1800870386998688175, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+      propertyPath: <BattleSide>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1952020129158263946, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

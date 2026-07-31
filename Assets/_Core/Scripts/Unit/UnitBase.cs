@@ -2,23 +2,32 @@ using R3;
 using System;
 using UnityEngine;
 
-public class UnitBase : MonoBehaviour, IPoolable
+[SelectionBase]
+public class UnitBase : MonoBehaviour, IPoolable, IDamageable
 {
     [field: SerializeField] public Transform Transform { get; private set; }
     [field: SerializeField] public UnitMovement Movement { get; private set; }
     [field: SerializeField] public UnitBaseFX FX { get; private set; }
+    [field: SerializeField] public UnitBattleSide BattleSide { get; private set; }
 
-    public UnitBattleSide UnitBattleSide => _health.BattleSide;
     public MultiplyingGate IgnoreGate { get; private set; }
 
-    [SerializeField] private UnitHealth _health;
     [SerializeField] private UnitDamageDealer _damageDealer;
     [SerializeField] private Collider _collider;
+
+    [Header("Health")]
+    [field: SerializeField] public bool ReturnsDamage { get; private set; }
+    [field: SerializeField] public int MaxHealth { get; private set; }
+    public int CurrentHealth { get; private set; }
+    public bool IsDead { get; private set; }
+
+    public event Action OnDead;
 
     private UnitSpawner _spawner;
 
     public void ActivatePoolable()
     {
+        ResetHealth();
         Movement.ResetAgent();
         Movement.Enable();
         FX.ResetToNormal();
@@ -38,23 +47,35 @@ public class UnitBase : MonoBehaviour, IPoolable
     //TODO: Consider getting spawner via injection, or any way to remove this interaction from UnitBase. 
     public void SetUnitSpawner(UnitSpawner spawner) => _spawner = spawner;
 
-    private void OnDead()
+    private void PerformDeath()
     {
+        IsDead = true;
         Movement.Disable();
         _collider.enabled = false;
         Action onFXEnd = () => _spawner.DeactivateUnit(this);
         FX.PlayDeadFx(onFXEnd);
     }
 
-    private void OnEnable()
+    public void TakeDamage(int damage)
     {
-        _health.OnDead += OnDead;
-        _health.ResetHealth();
+        if (IsDead == true)
+            return;
+
+        if (CurrentHealth - damage <= 0)
+        {
+            CurrentHealth = 0;
+            PerformDeath();
+            OnDead?.Invoke();
+            return;
+        }
+
+        CurrentHealth -= damage;
     }
 
-    private void OnDisable()
+    public void ResetHealth()
     {
-        _health.OnDead -= OnDead;
+        CurrentHealth = MaxHealth;
+        IsDead = false;
     }
 }
 
@@ -71,6 +92,8 @@ public interface IDamageable
 
     public bool ReturnsDamage { get; }
     public UnitBattleSide BattleSide { get; }
+
+    public event Action OnDead;
 
     public void TakeDamage(int damage);
 }

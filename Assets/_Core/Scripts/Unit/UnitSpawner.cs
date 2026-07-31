@@ -33,6 +33,12 @@ public class UnitSpawner : MonoBehaviour
         _deactivatedUnitsPool.Push(unit);
     }
 
+    public void KillAllActieveUnits()
+    {
+        foreach (IDamageable unitDamageable in _activeUnitsPool)
+            unitDamageable.TakeDamage(int.MaxValue);
+    }
+
     private IPoolable ExtractFreeUnit()
     {
         if (_deactivatedUnitsPool.Count <= 0)

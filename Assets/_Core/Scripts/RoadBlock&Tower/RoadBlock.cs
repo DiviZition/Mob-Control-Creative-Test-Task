@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoadBlock : MonoBehaviour, IDamageable
@@ -7,6 +9,8 @@ public class RoadBlock : MonoBehaviour, IDamageable
     [field: SerializeField] public UnitBattleSide BattleSide { get; private set; }
 
     [SerializeField] private TMP_Text _counterText;
+
+    public event Action OnDead;
 
     public int CurrentHealth {  get; private set; }
     public bool ReturnsDamage => true;
@@ -36,6 +40,7 @@ public class RoadBlock : MonoBehaviour, IDamageable
 
     protected virtual void RemoveRoadBlock()
     {
+        OnDead?.Invoke();
         Destroy(this.gameObject);
     }
 }

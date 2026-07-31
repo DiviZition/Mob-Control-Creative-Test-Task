@@ -5,7 +5,7 @@ public class UnitDamageDealer : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private float _attackCoolDown;
     [SerializeField] private UnitBattleSide _whoToAttack;
-    [SerializeField] private UnitHealth _unitHealth;
+    [SerializeField] private UnitBase _unitHealth;
 
     private float _nextAttackAvailable;
 

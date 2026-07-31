@@ -4851,7 +4851,6 @@ GameObject:
   - component: {fileID: 1800870386998688175}
   - component: {fileID: 4729476376964053023}
   - component: {fileID: 6031593575310502006}
-  - component: {fileID: 3732111550983527864}
   - component: {fileID: 782031038142240993}
   m_Layer: 7
   m_Name: Player Unit
@@ -4962,9 +4961,11 @@ MonoBehaviour:
   <Transform>k__BackingField: {fileID: 1952020129158263946}
   <Movement>k__BackingField: {fileID: 4729476376964053023}
   <FX>k__BackingField: {fileID: 6031593575310502006}
-  _health: {fileID: 3732111550983527864}
+  <BattleSide>k__BackingField: 0
   _damageDealer: {fileID: 782031038142240993}
   _collider: {fileID: 4196517174798622302}
+  <ReturnsDamage>k__BackingField: 0
+  <MaxHealth>k__BackingField: 1
 --- !u!114 &4729476376964053023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4997,21 +4998,6 @@ MonoBehaviour:
   _normalMaterial: {fileID: 2100000, guid: 58146e955d87ef649945d2c3f3365f40, type: 2}
   _deadMaterial: {fileID: 2100000, guid: 94533f8daf9ea6a4d9ba2138aec44893, type: 2}
   _unitMeshRenderer: {fileID: 7866089676130923935}
---- !u!114 &3732111550983527864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3568578334628208978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f748c05f2d3fd549b1c1ac344df0e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitHealth
-  <BattleSide>k__BackingField: 0
-  <ReturnsDamage>k__BackingField: 0
-  <MaxHealth>k__BackingField: 1
 --- !u!114 &782031038142240993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5027,7 +5013,7 @@ MonoBehaviour:
   _damage: 1
   _attackCoolDown: 1
   _whoToAttack: 1
-  _unitHealth: {fileID: 3732111550983527864}
+  _unitHealth: {fileID: 1800870386998688175}
 --- !u!1001 &4330953734684119345
 PrefabInstance:
   m_ObjectHideFlags: 0

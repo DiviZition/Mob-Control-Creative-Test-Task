@@ -12,7 +12,7 @@ public class UnitRedirectionTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out UnitBase unit) && unit.UnitBattleSide == _whoToRedirect)
+        if (other.TryGetComponent(out UnitBase unit) && unit.BattleSide == _whoToRedirect)
         {
             var rotation = _overrideDirection ? _directionReference.rotation : unit.transform.rotation;
             unit.Movement.RotateUnit(rotation);

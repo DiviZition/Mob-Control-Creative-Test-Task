@@ -26,7 +26,7 @@ public class UnitTransporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out UnitBase unit) && unit.UnitBattleSide == _whoToSweep)
+        if (other.TryGetComponent(out UnitBase unit) && unit.BattleSide == _whoToSweep)
             PlaceUnitInTube(unit);
     }
 

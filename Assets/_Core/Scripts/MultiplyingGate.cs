@@ -10,7 +10,7 @@ public class MultiplyingGate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out UnitBase unit) && unit.UnitBattleSide == _whoToMultiply && unit.IgnoreGate != this)
+        if (other.TryGetComponent(out UnitBase unit) && unit.BattleSide == _whoToMultiply && unit.IgnoreGate != this)
         {
             unit.SetGateToIgnore(this);
             for (int i = 0; i < _multiplyingValue - 1; i++)

@@ -7,6 +7,25 @@ using Random = UnityEngine.Random;
 [SelectionBase]
 public class EnemyTower : RoadBlock
 {
+    [SerializeField] private HordsUnitsSpawner _enemySpawning;
+
+    protected override void Start()
+    {
+        base.Start();
+        _enemySpawning.StartSpawningEnemy();
+    }
+
+    protected override void RemoveRoadBlock()
+    {
+
+    }
+
+    private void OnDrawGizmos() => _enemySpawning.DrawSpawnLine();
+}
+
+[Serializable]
+public class HordsUnitsSpawner
+{
     [SerializeField] private UnitSpawner _enemySpawner;
 
     [SerializeField] private float _timeToMaxPower;
@@ -20,12 +39,6 @@ public class EnemyTower : RoadBlock
 
     private IDisposable _enemySpawnMachine;
     private float _spawnStartTime;
-
-    protected override void Start()
-    {
-        base.Start();
-        StartSpawningEnemy();
-    }
 
     [ContextMenu("Start Spawning")]
     public void StartSpawningEnemy()
@@ -43,7 +56,7 @@ public class EnemyTower : RoadBlock
     {
         float progress = Mathf.InverseLerp(_spawnStartTime, _spawnStartTime + _timeToMaxPower, Time.time);
         int enemiesToSpawn = _enemySpawnPerSecond * (int)_enemySpawnedMultiplyer.Evaluate(progress);
-       
+
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Vector3 spawnPosition = _spawnLeftEndPoint.position + _spawnLeftEndPoint.right * Random.Range(0, _spawnLength);
@@ -51,12 +64,7 @@ public class EnemyTower : RoadBlock
         }
     }
 
-    protected override void RemoveRoadBlock()
-    {
-
-    }
-
-    private void OnDrawGizmos()
+    public void DrawSpawnLine()
     {
         if (_spawnLeftEndPoint == null)
             return;
