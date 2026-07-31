@@ -14,8 +14,6 @@ public class Damageable : MonoBehaviour, IDamageable
     public event Action OnHealthRestored;
     public event Action OnDead;
 
-    protected virtual void Start() => RestoreHealth();
-
     public virtual void TakeDamage(int damage)
     {
         if (IsDead)

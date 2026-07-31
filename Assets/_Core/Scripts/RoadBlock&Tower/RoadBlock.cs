@@ -1,10 +1,21 @@
 using UnityEngine;
 
-public class RoadBlock : Damageable
+public class RoadBlock : Damageable, IDisablable
 {
     protected override void PerformDeath()
     {
         base.PerformDeath();
-        Destroy(gameObject);
+        Disable();
+    }
+
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Enable()
+    {
+        RestoreHealth();
+        gameObject.SetActive(true);
     }
 }

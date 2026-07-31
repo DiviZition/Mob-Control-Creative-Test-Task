@@ -1,26 +1,32 @@
 using R3;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [SelectionBase]
-public class EnemyTower : Damageable
+public class EnemyTower : Damageable, IDisablable
 {
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
 
-    protected override void Start()
-    {
-        base.Start();
-        _enemySpawning.StartSpawningEnemy();
-    }
-
     protected override void PerformDeath()
     {
+        base.PerformDeath();
+        Disable();
+        _enemySpawning.KillAllUnits();
 
+        gameObject.SetActive(false);
     }
 
     private void OnDrawGizmos() => _enemySpawning.DrawSpawnLine();
+
+    public void Enable()
+    {
+        RestoreHealth();
+        _enemySpawning.StartSpawningEnemy();
+    }
+
+    public void Disable() => _enemySpawning.StopSpawning();
 }
 
 [Serializable]
@@ -41,9 +47,11 @@ public class HordsUnitsSpawner
     private float _spawnStartTime;
 
     [ContextMenu("Start Spawning")]
-    public void StartSpawningEnemy()
+    public void StartSpawningEnemy(bool resetProgress = true)
     {
-        _spawnStartTime = Time.time;
+        if (resetProgress)
+            _spawnStartTime = Time.time;
+            
         StopSpawning();
         _enemySpawnMachine = Observable
             .Interval(TimeSpan.FromSeconds(_enemySpawnDelay))
@@ -51,6 +59,7 @@ public class HordsUnitsSpawner
     }
 
     public void StopSpawning() => _enemySpawnMachine?.Dispose();
+    public void KillAllUnits() => _enemySpawner.KillAllActieveUnits(); 
 
     private void CalculateAndSpawnEnemy()
     {

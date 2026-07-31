@@ -33,6 +33,7 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-9fc0d4010bbf28b4594072e72b8655ab-1064122477-0
         - globalObjectIdString: GlobalObjectId_V1-2-9fc0d4010bbf28b4594072e72b8655ab-1659777595-0
         - globalObjectIdString: GlobalObjectId_V1-2-9fc0d4010bbf28b4594072e72b8655ab-1437262963-0
+        - globalObjectIdString: GlobalObjectId_V1-2-9fc0d4010bbf28b4594072e72b8655ab-1474803356-0
         values:
         - colorIndex: 0
           iconNameOrGuid: Terrain Icon
@@ -70,7 +71,7 @@ MonoBehaviour:
           iconNameOrGuid: EventSystem Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 3
+        - colorIndex: 2
           iconNameOrGuid: NavMeshAgent Icon
           isIconRecursive: 0
           isColorRecursive: 0
@@ -92,6 +93,10 @@ MonoBehaviour:
           isColorRecursive: 0
         - colorIndex: 6
           iconNameOrGuid: MeshCollider Icon
+          isIconRecursive: 0
+          isColorRecursive: 0
+        - colorIndex: 5
+          iconNameOrGuid: NavMeshAgent Icon
           isIconRecursive: 0
           isColorRecursive: 0
   bookmarks: []
