@@ -5,6 +5,12 @@ public class UnitRedirectionTrigger : MonoBehaviour
     [SerializeField] private UnitBattleSide _whoToRedirect;
     [SerializeField] private Transform _directionReference;
 
+    private void OnValidate()
+    {
+        if (_directionReference == null)
+            _directionReference = transform;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out UnitBase unit) && unit.BattleSide == _whoToRedirect)

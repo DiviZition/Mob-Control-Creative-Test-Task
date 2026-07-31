@@ -5094,7 +5094,7 @@ MonoBehaviour:
   <BattleSide>k__BackingField: 0
   _damageDealer: {fileID: 782031038142240993}
   _collider: {fileID: 4196517174798622302}
-  <ReturnsDamage>k__BackingField: 0
+  <ReturnsDamage>k__BackingField: 1
   <MaxHealth>k__BackingField: 1
 --- !u!114 &4729476376964053023
 MonoBehaviour:
