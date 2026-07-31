@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: <BattleSide>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4729476376964053023, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+      propertyPath: _initialMoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6031593575310502006, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       propertyPath: _normalMaterial
       value: 

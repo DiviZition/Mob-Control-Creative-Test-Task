@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameScenario : MonoBehaviour
 {
     [SerializeField] private Damageable _playerTower;
-    [SerializeField] private Damageable _enemyTowers;
+    [SerializeField] private Damageable _enemyTower;
 
     //TODO: Make this field respect interfaces via Odin, or a custom serialization logic;
     [SerializeReference] private MonoBehaviour[] _disablableElements;
@@ -24,17 +24,8 @@ public class GameScenario : MonoBehaviour
         DisableActieveElements();
     }
 
-    private void OnPlayerDefeated()
-    {
-        OnPlayerLost?.Invoke();
-        FinishScenario();
-    }
-
-    private void OnEnemyDefeated()
-    {
-        OnPlayerWon?.Invoke();
-        FinishScenario();
-    }
+    private void OnPlayerDefeated() => OnPlayerLost?.Invoke();
+    private void OnEnemyDefeated() => OnPlayerWon?.Invoke();
 
     private void EnableActieveElements() => SwitchDisablableElementsEnabled(isEnabled: true);
     private void DisableActieveElements() => SwitchDisablableElementsEnabled(isEnabled: false);
@@ -54,11 +45,11 @@ public class GameScenario : MonoBehaviour
     private void UnsubscribeFromEvents()
     {
         _playerTower.OnDead -= OnPlayerDefeated;
-        _enemyTowers.OnDead -= OnEnemyDefeated;
+        _enemyTower.OnDead -= OnEnemyDefeated;
     }
     private void SubscribeToEvents()
     {
         _playerTower.OnDead += OnPlayerDefeated;
-        _enemyTowers.OnDead += OnEnemyDefeated;
+        _enemyTower.OnDead += OnEnemyDefeated;
     }
 }

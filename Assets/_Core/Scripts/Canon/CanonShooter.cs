@@ -8,6 +8,7 @@ public class CanonShooter : MonoBehaviour
     [SerializeField] private MMF_Player _shootEffect;
     [SerializeField] private Transform _unitSpawnPoint;
     [SerializeField] private float _shootThreashold = 0.1f;
+    [SerializeField] private float _shootOffset = 0.01f;
 
     private float _nextTimeShotAvailable;
 
@@ -18,7 +19,8 @@ public class CanonShooter : MonoBehaviour
             _shootEffect.ResetFeedbacks();
             _shootEffect.RestoreInitialValues();
             _shootEffect.PlayFeedbacks();
-            _unitSpawner.SpawnUnit(_unitSpawnPoint.position, _unitSpawnPoint.localRotation);
+            Vector3 unitSpawnPosition = _unitSpawnPoint.position + (_unitSpawnPoint.right * Random.Range(-_shootOffset, _shootOffset));
+            _unitSpawner.SpawnUnit(unitSpawnPosition, _unitSpawnPoint.localRotation);
             _nextTimeShotAvailable = Time.time + _shootThreashold;
         }
     }

@@ -5,32 +5,40 @@ using UnityEngine.UI;
 
 public class UiSystem : MonoBehaviour
 {
-    [SerializeField] private DefeatedScreenData _defeatedScreenData;
+    [SerializeField] private PopUpTextScreenData _defeatedScreenData;
+    [SerializeField] private PopUpTextScreenData _youWonScreenData;
 
     private void Awake() => HideAllScreens();
 
     public void HideAllScreens()
     {
         _defeatedScreenData.Canvas.gameObject.SetActive(false);
+        _youWonScreenData.Canvas.gameObject.SetActive(false);
     }
 
     [ContextMenu("Show Defeated Screen")]
-    public void ShowDefeatedScreen()
+    public void ShowDefeatedScreen() => PopUpTextScreen(ref _defeatedScreenData);
+
+    [ContextMenu("Show You Won Screen")]
+    public void ShowYouWonScreen() => PopUpTextScreen(ref _youWonScreenData);
+
+    public void PopUpTextScreen(ref PopUpTextScreenData data)
     {
-        _defeatedScreenData.Image.transform.localScale = _defeatedScreenData.StartAnimationSize;
-        _defeatedScreenData.Canvas.gameObject.SetActive(true);
+        HideAllScreens();
+        data.Image.transform.localScale = data.StartAnimationSize;
+        data.Canvas.gameObject.SetActive(true);
 
         Tween.Scale(
-            target: _defeatedScreenData.Image.transform,
-            startValue: _defeatedScreenData.StartAnimationSize,
-            endValue: _defeatedScreenData.EndAnimationSize,
-            duration: _defeatedScreenData.AnimationDuration,
-            ease: _defeatedScreenData._easing);
+            target: data.Image.transform,
+            startValue: data.StartAnimationSize,
+            endValue: data.EndAnimationSize,
+            duration: data.AnimationDuration,
+            ease: data._easing);
     }
 }
 
 [Serializable]
-public struct DefeatedScreenData
+public struct PopUpTextScreenData
 {
     public Canvas Canvas;
     public Image Image;

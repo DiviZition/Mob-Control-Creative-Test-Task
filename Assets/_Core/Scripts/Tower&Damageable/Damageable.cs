@@ -19,7 +19,7 @@ public class Damageable : MonoBehaviour, IDamageable
         if (IsDead)
             return;
 
-        if (CurrentHealth - damage < 0)
+        if (CurrentHealth - damage <= 0)
         {
             CurrentHealth = 0;
             PerformDeath();
@@ -32,10 +32,7 @@ public class Damageable : MonoBehaviour, IDamageable
         OnTakeDamage?.Invoke();
     }
 
-    protected virtual void PerformDeath()
-    {
-        OnDead?.Invoke();
-    }
+    protected virtual void PerformDeath() => OnDead?.Invoke();
 
     protected virtual void RestoreHealth()
     {

@@ -83,6 +83,7 @@ MonoBehaviour:
     customIcons:
     - NavMeshAgent Icon
     - OffMeshLink Icon
+    - preAudioPlayOff
     enabled: 1
   - builtinIcons: []
     customIcons: []
