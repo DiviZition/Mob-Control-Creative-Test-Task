@@ -21,6 +21,7 @@ public class Damageable : MonoBehaviour, IDamageable
 
         if (CurrentHealth - damage <= 0)
         {
+            IsDead = true;
             CurrentHealth = 0;
             PerformDeath();
         }

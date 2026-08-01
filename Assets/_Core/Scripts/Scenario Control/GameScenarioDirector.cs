@@ -1,11 +1,14 @@
+using PrimeTween;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class GameScenarioExecutor : MonoBehaviour
+public class GameScenarioDirector : MonoBehaviour
 {
     [SerializeField] private UiSystem _uiSystem;
     [SerializeField] private GameScenario _scenario;
     [SerializeField] private bool _runScenarioFromStart;
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void Initialize() => PrimeTweenConfig.SetTweensCapacity(1024);
 
     private void Start()
     {
@@ -26,8 +29,8 @@ public class GameScenarioExecutor : MonoBehaviour
 
     public void StopScenarion()
     {
-        _scenario.FinishScenario();
         UnsubscribeFromScenario(_scenario);
+        _scenario.FinishScenario();
     }
 
     private void OnPlayerLost()
