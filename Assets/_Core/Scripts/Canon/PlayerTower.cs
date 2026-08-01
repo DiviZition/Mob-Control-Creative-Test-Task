@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerTower : Damageable, IDisablable
+public class PlayerTower : Damageable, IActivatable
 {
     [SerializeField] private CanonMovement _canonMovement;
     [SerializeField] private CanonShooter _canonShooter;

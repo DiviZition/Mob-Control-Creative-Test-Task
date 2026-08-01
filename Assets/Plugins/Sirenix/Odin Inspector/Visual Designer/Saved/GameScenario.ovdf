@@ -1,0 +1,15 @@
+OVDF v1.1
+GameScenario, Assembly-CSharp
+MetaGuid:5817da4e2eb3632439dc8defbbb0035e
+
+# _disablableElements
+Visibility: Shown
+
+# PerformScenario()
+Visibility: Shown
+
+# FinishScenario()
+Visibility: Shown
+
+# StopScenario()
+Visibility: Shown

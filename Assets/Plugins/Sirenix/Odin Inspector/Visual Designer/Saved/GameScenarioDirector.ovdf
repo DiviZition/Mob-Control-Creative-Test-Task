@@ -1,0 +1,12 @@
+OVDF v1.1
+GameScenarioDirector, Assembly-CSharp
+MetaGuid:2ca1bf97007bfa745b5da8ba47622392
+
+# SetScenario(GameScenario)
+Visibility: Hidden
+
+# StopScenarion()
+Visibility: Shown
+
+# RunScenario()
+Visibility: Shown

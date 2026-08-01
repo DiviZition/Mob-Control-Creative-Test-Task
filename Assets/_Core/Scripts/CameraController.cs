@@ -1,7 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour, IDisablable
+public class CameraController : MonoBehaviour, IActivatable
 {
     [SerializeField] private MMF_Player _doCameraStuf;
     

@@ -7,7 +7,7 @@ public class GameScenario : MonoBehaviour
     [SerializeField] private Damageable _enemyTower;
 
     //TODO: Make this field respect interfaces via Odin, or a custom serialization logic;
-    [SerializeReference] private MonoBehaviour[] _disablableElements;
+    [SerializeField] private MonoBehaviour[] _disablableElements;
 
     public event Action OnPlayerLost;
     public event Action OnPlayerWon;
@@ -18,7 +18,7 @@ public class GameScenario : MonoBehaviour
         EnableActieveElements();
     }
 
-    public void FinishScenario()
+    public void StopScenario()
     {
         UnsubscribeFromEvents();
         DisableActieveElements();
@@ -31,14 +31,18 @@ public class GameScenario : MonoBehaviour
     private void DisableActieveElements() => SwitchDisablableElementsEnabled(isEnabled: false);
     private void SwitchDisablableElementsEnabled(bool isEnabled)
     {
-        foreach (var disablable in _disablableElements)
+        for (int i = 0; i < _disablableElements.Length; i++)
         {
-            if (disablable is IDisablable element)
+            if (_disablableElements[i] is IActivatable element)
             {
                 if (isEnabled)
                     element.Enable();
                 else
                     element.Disable();
+            }
+            else
+            {
+                _disablableElements[i] = null;
             }
         }
     }

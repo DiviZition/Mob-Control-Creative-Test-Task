@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class UnitMovement : MonoBehaviour, IDisablable
+public class UnitMovement : MonoBehaviour, IActivatable
 {
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Transform _transform;

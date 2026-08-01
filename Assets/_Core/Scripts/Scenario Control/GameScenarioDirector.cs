@@ -7,6 +7,8 @@ public class GameScenarioDirector : MonoBehaviour
     [SerializeField] private GameScenario _scenario;
     [SerializeField] private bool _runScenarioFromStart;
 
+    private GameScenario _currentScenario;
+
     [RuntimeInitializeOnLoadMethod]
     public static void Initialize() => PrimeTweenConfig.SetTweensCapacity(1024);
 
@@ -16,21 +18,21 @@ public class GameScenarioDirector : MonoBehaviour
             RunScenario();
     }
 
-    public void SetScenario(GameScenario newScenario) => _scenario = newScenario;
-    [ContextMenu("Run Scenarion")]
     public void RunScenario()
     {
         _uiSystem.HideAllScreens();
 
-        UnsubscribeFromScenario(_scenario);
+        UnsubscribeFromScenario(_currentScenario);
         SubscribeToScenario(_scenario);
+        _currentScenario = _scenario;
+
         _scenario.PerformScenario();
     }
 
     public void StopScenarion()
     {
         UnsubscribeFromScenario(_scenario);
-        _scenario.FinishScenario();
+        _scenario.StopScenario();
     }
 
     private void OnPlayerLost()
@@ -62,4 +64,6 @@ public class GameScenarioDirector : MonoBehaviour
             scenario.OnPlayerWon += OnPlayerWon;
         }
     }
+
+    private void OnDestroy() => UnsubscribeFromScenario(_scenario);
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IDisablable
+public interface IActivatable
 {
     void Enable();
     void Disable();

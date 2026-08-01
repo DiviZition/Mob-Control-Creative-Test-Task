@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [SelectionBase]
-public class EnemyTower : Damageable, IDisablable
+public class EnemyTower : Damageable, IActivatable
 {
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
 
