@@ -10,3 +10,9 @@ Visibility: Shown
 
 # RunScenario()
 Visibility: Shown
+
+# PerformScenario()
+Visibility: Shown
+
+# StopScenario()
+Visibility: Shown

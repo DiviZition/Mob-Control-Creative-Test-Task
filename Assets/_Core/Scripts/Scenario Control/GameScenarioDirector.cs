@@ -1,69 +1,67 @@
-using PrimeTween;
+using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
-public class GameScenarioDirector : MonoBehaviour
+public class GameScenarioDirector : SerializedMonoBehaviour
 {
     [SerializeField] private UiSystem _uiSystem;
-    [SerializeField] private GameScenario _scenario;
-    [SerializeField] private bool _runScenarioOnStart;
+    [SerializeField] private Damageable _playerTower;
+    [SerializeField] private Damageable _enemyTower;
 
-    private GameScenario _currentScenario;
+    //TODO: Make this field respect interfaces via Odin, or a custom serialization logic;
+    [SerializeField] private IActivatable[] _disablableElements;
 
-    [RuntimeInitializeOnLoadMethod]
-    public static void Initialize() => PrimeTweenConfig.SetTweensCapacity(1024);
-
-    private void Start()
-    {
-        if (_runScenarioOnStart)
-            RunScenario();
-    }
-
-    public void RunScenario()
+    public void PerformScenario()
     {
         _uiSystem.HideAllScreens();
-
-        UnsubscribeFromScenario(_currentScenario);
-        SubscribeToScenario(_scenario);
-        _currentScenario = _scenario;
-
-        _scenario.PerformScenario();
+        SubscribeToEvents();
+        EnableActieveElements();
     }
 
-    public void StopScenarion()
+    public void StopScenario()
     {
-        UnsubscribeFromScenario(_scenario);
-        _scenario.StopScenario();
+        UnsubscribeFromEvents();
+        DisableActieveElements();
     }
 
-    private void OnPlayerLost()
+    private void OnPlayerDefeated()
     {
         _uiSystem.ShowDefeatedScreen();
-        StopScenarion();
+        StopScenario();
     }
-
-    private void OnPlayerWon()
+    private void OnEnemyDefeated()
     {
         _uiSystem.ShowYouWonScreen();
-        StopScenarion();
+        StopScenario();
     }
 
-    private void UnsubscribeFromScenario(GameScenario scenario)
+    private void EnableActieveElements() => SwitchDisablableElementsEnabled(isEnabled: true);
+    private void DisableActieveElements() => SwitchDisablableElementsEnabled(isEnabled: false);
+    private void SwitchDisablableElementsEnabled(bool isEnabled)
     {
-        if (scenario != null)
+        for (int i = 0; i < _disablableElements.Length; i++)
         {
-            scenario.OnPlayerLost -= OnPlayerLost;
-            scenario.OnPlayerWon -= OnPlayerWon;
+            if (_disablableElements[i] is IActivatable element)
+            {
+                if (isEnabled)
+                    element.Enable();
+                else
+                    element.Disable();
+            }
+            else
+            {
+                _disablableElements[i] = null;
+            }
         }
     }
-
-    private void SubscribeToScenario(GameScenario scenario)
+    private void UnsubscribeFromEvents()
     {
-        if (scenario != null)
-        {
-            scenario.OnPlayerLost += OnPlayerLost;
-            scenario.OnPlayerWon += OnPlayerWon;
-        }
+        _playerTower.OnDead -= OnPlayerDefeated;
+        _enemyTower.OnDead -= OnEnemyDefeated;
     }
-
-    private void OnDestroy() => UnsubscribeFromScenario(_scenario);
+    private void SubscribeToEvents()
+    {
+        _playerTower.OnDead += OnPlayerDefeated;
+        _enemyTower.OnDead += OnEnemyDefeated;
+    }
 }

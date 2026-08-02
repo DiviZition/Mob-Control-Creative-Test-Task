@@ -5,16 +5,17 @@ using UnityEngine;
 public class EnemyTower : Damageable, IActivatable
 {
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
+    [SerializeField] private Transform _visual;
 
     private void Start() => RestoreHealth();
 
     protected override void PerformDeath()
     {
         base.PerformDeath();
-        Disable();
         _enemySpawning.KillAllUnits();
+        _enemySpawning.StopSpawning();
 
-        gameObject.SetActive(false);
+        _visual.gameObject.SetActive(false);
     }
 
     private void OnDrawGizmos() => _enemySpawning.DrawSpawnLine();
@@ -22,6 +23,7 @@ public class EnemyTower : Damageable, IActivatable
     public void Enable()
     {
         RestoreHealth();
+        _visual.gameObject.SetActive(true);
         _enemySpawning.StartSpawningEnemy();
     }
 

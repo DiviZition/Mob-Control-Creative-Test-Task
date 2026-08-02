@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
-public class HordsUnitsSpawner
+public class HordsUnitsSpawner 
 {
     [SerializeField] private UnitSpawner _enemySpawner;
 
