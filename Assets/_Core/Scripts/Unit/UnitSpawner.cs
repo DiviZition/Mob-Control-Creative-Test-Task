@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
-using UnityEngine.UI;
+using R3;
+using System;
 
 public class UnitSpawner : MonoBehaviour
 {
@@ -11,19 +12,24 @@ public class UnitSpawner : MonoBehaviour
     private HashSet<IPoolable> _activeUnitsPool = new HashSet<IPoolable>(1024);
     private Stack<IPoolable> _deactivatedUnitsPool = new Stack<IPoolable>(1024);
 
-    public UnitBase SpawnUnit(Transform reference, bool activateUnit = true) => SpawnUnit(reference.position, reference.localRotation, activateUnit);
-    public UnitBase SpawnUnit(Vector3 position, Quaternion rotation, bool activateUnit = true)
+    public Subject<UnitBase> OnUnitSpawned {  get; private set; } = new Subject<UnitBase>();
+    public Subject<UnitBase> OnUnitDespawned {  get; private set; } = new Subject<UnitBase>();
+
+    public UnitBase SpawnUnit(Vector3 position, Quaternion rotation, Action<UnitBase> beforeActivateAction = null)
     {
-        IPoolable unit = ExtractFreeUnit();
-        unit.Transform.position = position;
-        unit.Transform.localRotation = rotation;
+        IPoolable poolableUnit = ExtractFreeUnit();
+        poolableUnit.Transform.position = position;
+        poolableUnit.Transform.localRotation = rotation;
 
-        _activeUnitsPool.Add(unit);
+        _activeUnitsPool.Add(poolableUnit);
         
-        if (activateUnit == true)
-            unit.ActivatePoolable();
+        UnitBase unitBase = poolableUnit as UnitBase;
+        beforeActivateAction?.Invoke(unitBase);
 
-        return unit as UnitBase;
+        poolableUnit.ActivatePoolable();
+
+        OnUnitSpawned.OnNext(unitBase);
+        return unitBase;
     }
 
     public void DeactivateUnit(UnitBase unit)
@@ -31,6 +37,7 @@ public class UnitSpawner : MonoBehaviour
         unit.DeactivatePoolable();
         _activeUnitsPool.Remove(unit);
         _deactivatedUnitsPool.Push(unit);
+        OnUnitDespawned.OnNext(unit);
     }
 
     public void KillAllActieveUnits()

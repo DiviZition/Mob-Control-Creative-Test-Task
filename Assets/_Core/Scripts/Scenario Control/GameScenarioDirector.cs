@@ -5,7 +5,7 @@ public class GameScenarioDirector : MonoBehaviour
 {
     [SerializeField] private UiSystem _uiSystem;
     [SerializeField] private GameScenario _scenario;
-    [SerializeField] private bool _runScenarioFromStart;
+    [SerializeField] private bool _runScenarioOnStart;
 
     private GameScenario _currentScenario;
 
@@ -14,7 +14,7 @@ public class GameScenarioDirector : MonoBehaviour
 
     private void Start()
     {
-        if (_runScenarioFromStart)
+        if (_runScenarioOnStart)
             RunScenario();
     }
 

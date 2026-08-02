@@ -17,10 +17,9 @@ public class MultiplyingGate : MonoBehaviour
             {
                 Vector3 spawnPosition = unit.Transform.position;
                 spawnPosition += (UnityEngine.Random.insideUnitSphere * _spawnPositionRandomOffset).ResetY();
-
-                var spawnedUnit = _unitSpawner.SpawnUnit(spawnPosition, unit.Transform.localRotation, activateUnit: false);
-                spawnedUnit.SetGateToIgnore(this);
-                spawnedUnit.ActivatePoolable();
+                
+                Action<UnitBase> actionBeforeActivate = (unit) => unit.SetGateToIgnore(this);
+                _unitSpawner.SpawnUnit(spawnPosition, unit.Transform.localRotation, actionBeforeActivate);
             }
         }
     }

@@ -1,0 +1,9 @@
+OVDF v1.1
+UnitMassiveSoundPlayer, Assembly-CSharp
+MetaGuid:6b939bc539d66bf4886627464fd1886e
+
+# PlayDieSoundOnUnit(Transform)
+Visibility: Hidden
+
+# PlayStepSoundOnUnit(Transform)
+Visibility: Hidden
