@@ -38,10 +38,6 @@ public class UnitMassiveSoundPlayer : MonoBehaviour, IActivatable
                 _dieSoundsSubCollection.Add(unit, onDead);
             }
         });
-
-        //var dieSoundUnsub = _spawnerToObserve.OnUnitDespawned.Subscribe(unit => unit.OnDead -= _dieSoundsSubCollection[unit]);
-
-        //_dieSoundSubs = Disposable.Combine(dieSoundSub, dieSoundUnsub);
     }
 
     public void Disable()

@@ -4,6 +4,7 @@ using UnityEngine;
 [SelectionBase]
 public class EnemyTower : Damageable, IActivatable
 {
+    [SerializeField] private HordsUnitsSpawner _bossSpawning;
     [SerializeField] private HordsUnitsSpawner _enemySpawning;
     [SerializeField] private Transform _visual;
 
@@ -15,6 +16,9 @@ public class EnemyTower : Damageable, IActivatable
         _enemySpawning.KillAllUnits();
         _enemySpawning.StopSpawning();
 
+        _bossSpawning.KillAllUnits();
+        _bossSpawning.StopSpawning();
+
         _visual.gameObject.SetActive(false);
     }
 
@@ -25,6 +29,7 @@ public class EnemyTower : Damageable, IActivatable
         RestoreHealth();
         _visual.gameObject.SetActive(true);
         _enemySpawning.StartSpawningEnemy();
+        _bossSpawning.StartSpawningEnemy();
     }
 
     public void Disable()

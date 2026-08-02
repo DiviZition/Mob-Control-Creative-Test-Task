@@ -6,13 +6,17 @@ public class Damageable : MonoBehaviour, IDamageable
     [field: SerializeField] public int MaxHealth { get; private set; }
     [field: SerializeField] public UnitBattleSide BattleSide { get; private set; }
     [field: SerializeField] public bool ReturnsDamage { get; private set; }
+    [field: SerializeField] public Transform Transform { get; private set; }
 
     public int CurrentHealth {  get; private set; }
     public bool IsDead { get; private set; }
 
+
     public event Action OnTakeDamage;
     public event Action OnHealthRestored;
     public event Action OnDead;
+
+    private void OnValidate() => Transform ??= transform;
 
     public virtual void TakeDamage(int damage)
     {

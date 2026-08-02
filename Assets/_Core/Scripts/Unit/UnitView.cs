@@ -21,7 +21,7 @@ public class UnitView : MonoBehaviour
         if (TryGetAnimDataIndex(animType, out int animDataIndex) == false)
             return;
 
-        PlayAnimation(_animations[animDataIndex].StateName, _animations[animDataIndex].DeclaredDuration);
+        PlayAnimation(_animations[animDataIndex].StateName);
         if (onAnimEnded != null)
             Tween.Delay(_animations[animDataIndex].DeclaredDuration, () => onAnimEnded?.Invoke());
     }

@@ -5,13 +5,11 @@ using UnityEngine;
 [SelectionBase]
 public class UnitBase : Damageable, IPoolable, IDamageable
 {
-    [field: SerializeField] public Transform Transform { get; private set; }
     [field: SerializeField] public UnitMovement Movement { get; private set; }
     [field: SerializeField] public UnitView View { get; private set; }
 
     public MultiplyingGate IgnoreGate { get; private set; }
 
-    [SerializeField] private UnitDamageDealer _damageDealer;
     [SerializeField] private Collider _collider;
 
     private UnitSpawner _spawner;

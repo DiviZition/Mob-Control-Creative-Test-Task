@@ -1,0 +1,6 @@
+OVDF v1.1
+HealthBar, Assembly-CSharp
+MetaGuid:e5757bf887b92ec4d84631040583dc4f
+
+# SetupHPBar(int, int)
+Visibility: Shown
