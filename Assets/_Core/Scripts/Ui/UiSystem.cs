@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UiSystem : MonoBehaviour
 {
+    [SerializeField] private AudioSource _soundSource;
+
     [SerializeField] private PopUpTextScreenData _defeatedScreenData;
     [SerializeField] private PopUpTextScreenData _youWonScreenData;
 
@@ -27,6 +29,7 @@ public class UiSystem : MonoBehaviour
         HideAllScreens();
         data.Image.transform.localScale = data.StartAnimationSize;
         data.Canvas.gameObject.SetActive(true);
+        PlayUiSound(ref data);
 
         Tween.Scale(
             target: data.Image.transform,
@@ -34,6 +37,14 @@ public class UiSystem : MonoBehaviour
             endValue: data.EndAnimationSize,
             duration: data.AnimationDuration,
             ease: data._easing);
+    }
+
+    private void PlayUiSound(ref PopUpTextScreenData data)
+    {
+        if (data._sound != null)
+        {
+            _soundSource.PlayOneShot(data._sound);
+        }
     }
 }
 
@@ -46,4 +57,5 @@ public struct PopUpTextScreenData
     public Vector3 EndAnimationSize;
     public float AnimationDuration;
     public Ease _easing;
+    public AudioClip _sound;
 }

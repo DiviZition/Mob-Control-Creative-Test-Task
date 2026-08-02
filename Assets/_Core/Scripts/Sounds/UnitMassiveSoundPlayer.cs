@@ -29,7 +29,7 @@ public class UnitMassiveSoundPlayer : MonoBehaviour, IActivatable
             .ThrottleFirst(TimeSpan.FromSeconds(_throttleSoundsWindow))
             .Subscribe(unit => PlayStepSoundOnUnit(unit.Transform));
 
-        var dieSoundSub = _spawnerToObserve.OnUnitSpawned.Subscribe(unit =>
+        _dieSoundSubs = _spawnerToObserve.OnUnitSpawned.Subscribe(unit =>
         {
             if (_dieSoundsSubCollection.ContainsKey(unit) == false)
             {
@@ -39,9 +39,9 @@ public class UnitMassiveSoundPlayer : MonoBehaviour, IActivatable
             }
         });
 
-        var dieSoundUnsub = _spawnerToObserve.OnUnitDespawned.Subscribe(unit => unit.OnDead -= _dieSoundsSubCollection[unit]);
+        //var dieSoundUnsub = _spawnerToObserve.OnUnitDespawned.Subscribe(unit => unit.OnDead -= _dieSoundsSubCollection[unit]);
 
-        _dieSoundSubs = Disposable.Combine(dieSoundSub, dieSoundUnsub);
+        //_dieSoundSubs = Disposable.Combine(dieSoundSub, dieSoundUnsub);
     }
 
     public void Disable()
