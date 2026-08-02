@@ -4,8 +4,7 @@ public class UnitDamageDealer : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _attackCoolDown;
-    [SerializeField] private UnitBattleSide _whoToAttack;
-    [SerializeField] private UnitBase _unitHealth;
+    [SerializeField] private UnitBase _unitBase;
 
     private float _nextAttackAvailable;
 
@@ -14,12 +13,13 @@ public class UnitDamageDealer : MonoBehaviour
         if (_nextAttackAvailable > Time.time)
             return;
 
-        if (other.TryGetComponent(out IDamageable damageable) && damageable.BattleSide == _whoToAttack)
+        if (other.TryGetComponent(out IDamageable damageable) && damageable.BattleSide != _unitBase.BattleSide)
         {
             damageable.TakeDamage(_damage);
 
+            //Debug.Log($"{this.gameObject.name} killed {other.gameObject.name}");
             if (damageable.ReturnsDamage == true)
-                _unitHealth.TakeDamage(_damage);
+                _unitBase.TakeDamage(_damage);
 
             _nextAttackAvailable = Time.time + _attackCoolDown;
         }

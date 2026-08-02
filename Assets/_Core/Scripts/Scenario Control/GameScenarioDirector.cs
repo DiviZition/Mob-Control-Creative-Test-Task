@@ -1,3 +1,4 @@
+using PrimeTween;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class GameScenarioDirector : SerializedMonoBehaviour
 
     //TODO: Make this field respect interfaces via Odin, or a custom serialization logic;
     [SerializeField] private IActivatable[] _disablableElements;
+
+    [RuntimeInitializeOnLoadMethod]
+    public static void RunTimeInitialization()
+    {
+        PrimeTweenConfig.SetTweensCapacity(2048);
+    }
 
     public void PerformScenario()
     {

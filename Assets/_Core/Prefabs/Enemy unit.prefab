@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 333219400286540349, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 782031038142240993, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       propertyPath: _whoToAttack
       value: 0
@@ -84,6 +88,10 @@ PrefabInstance:
       propertyPath: <BattleSide>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4041961034462835836, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e47da00a4bb765499b287324a12cbd2, type: 2}
     - target: {fileID: 4729476376964053023, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       propertyPath: _initialMoveSpeed
       value: 1.25

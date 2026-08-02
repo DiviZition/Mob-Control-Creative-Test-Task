@@ -7,7 +7,7 @@ public class UnitBase : Damageable, IPoolable, IDamageable
 {
     [field: SerializeField] public Transform Transform { get; private set; }
     [field: SerializeField] public UnitMovement Movement { get; private set; }
-    [field: SerializeField] public UnitBaseFX FX { get; private set; }
+    [field: SerializeField] public UnitView View { get; private set; }
 
     public MultiplyingGate IgnoreGate { get; private set; }
 
@@ -21,10 +21,9 @@ public class UnitBase : Damageable, IPoolable, IDamageable
         RestoreHealth();
         Movement.ResetAgent();
         Movement.Enable();
-        FX.ResetToNormal();
         this.gameObject.SetActive(true);
+        View.PlayAnimation(AnimationType.Run);
         _collider.enabled = true;
-        FX.PlaySpawnVFX();
     }
 
     public void DeactivatePoolable()
@@ -44,7 +43,7 @@ public class UnitBase : Damageable, IPoolable, IDamageable
         Movement.Disable();
         _collider.enabled = false;
         Action onFXEnd = () => _spawner.DeactivateUnit(this);
-        FX.PlayDeadFx(onFXEnd);
+        View.PlayDeadAnimation(onFXEnd);
     }
 }
 
