@@ -41,7 +41,7 @@ public class CanonMovement : MonoBehaviour
 
         _canonTransform.localPosition += moveDelta;
         foreach (Transform wheel in _wheels)
-            wheel.Rotate(Vector3.forward, _wheelsRotationSpeed * Time.deltaTime * (_currentDirectionAccelerated * -1));
+            wheel?.Rotate(Vector3.right, _wheelsRotationSpeed * Time.deltaTime * (_currentDirectionAccelerated * -1));
     }
 
     private void OnDrawGizmos()
