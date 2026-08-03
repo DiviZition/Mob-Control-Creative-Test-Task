@@ -183,7 +183,7 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
-    - _WaveIntensity: 0.2
+    - _WaveIntensity: 0.05
     - _WaveScale: 100
     - _WaveSpeed: 500
     - _Wave_Intensity: 0.2
@@ -206,6 +206,7 @@ Material:
     - _Foam_Color: {r: 1, g: 1, b: 1, a: 0.7882353}
     - _ShallowColor: {r: 0, g: 0.8360357, b: 1, a: 0.36862746}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &1377478033415620015
 MonoBehaviour:
   m_ObjectHideFlags: 11

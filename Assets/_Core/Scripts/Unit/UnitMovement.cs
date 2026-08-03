@@ -30,11 +30,11 @@ public class UnitMovement : MonoBehaviour, IActivatable
     }  
 
     public void WarpAgent(Vector3 position) => _agent.Warp(position);
-    public void SetNewMoveSpeed(float newSpeed) => _currentMoveSpeed = newSpeed;
+    public void SetNewMoveSpeed(float newSpeed) => _currentMoveSpeed = newSpeed +Random.Range(-0.1f, 0.1f);//Random to avoid navMesh stacking
 
     public void ResetAgent()
     {
-        _currentMoveSpeed = _initialMoveSpeed;
+        SetNewMoveSpeed(_initialMoveSpeed);
         _agent.enabled = false;
         _agent.Warp(_transform.position);
         _movingDirection = _transform.forward;

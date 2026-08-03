@@ -4885,19 +4885,19 @@ NavMeshAgent:
   m_GameObject: {fileID: 3568578334628208978}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Speed: 3.5
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 270
-  m_StoppingDistance: 0
+  m_StoppingDistance: 3.6
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 0
   m_Height: 0.5
   m_BaseOffset: 0
-  m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 2
+  m_WalkableMask: 16
+  m_ObstacleAvoidanceType: 0
 --- !u!135 &4196517174798622302
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4964,7 +4964,6 @@ MonoBehaviour:
   <Transform>k__BackingField: {fileID: 1952020129158263946}
   <Movement>k__BackingField: {fileID: 4729476376964053023}
   <View>k__BackingField: {fileID: 6031593575310502006}
-  _damageDealer: {fileID: 782031038142240993}
   _collider: {fileID: 4196517174798622302}
 --- !u!114 &4729476376964053023
 MonoBehaviour:

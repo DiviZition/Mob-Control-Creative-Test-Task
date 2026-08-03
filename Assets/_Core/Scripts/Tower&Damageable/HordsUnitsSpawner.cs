@@ -29,6 +29,7 @@ public class HordsUnitsSpawner
         StopSpawning();
         _enemySpawnMachine = Observable
             .Interval(TimeSpan.FromSeconds(_enemySpawnDelay))
+            .Prepend(Unit.Default)
             .Subscribe(_ => CalculateAndSpawnEnemy());
     }
 
@@ -37,13 +38,13 @@ public class HordsUnitsSpawner
 
     private void CalculateAndSpawnEnemy()
     {
-        float progress = Mathf.InverseLerp(_spawnStartTime, _spawnStartTime + _timeToMaxPower, Time.time);
+        float progress = Mathf.InverseLerp(_spawnStartTime, _spawnStartTime + _timeToMaxPower, Time.time - _spawnStartTime);
         int enemiesToSpawn = _enemySpawnPerSecond * (int)_enemySpawnedMultiplyer.Evaluate(progress);
 
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Vector3 spawnPosition = _spawnLeftEndPoint.position + _spawnLeftEndPoint.right * Random.Range(0, _spawnLength);
-            _enemySpawner.SpawnUnit(spawnPosition, _unitsInitialDirection.rotation);
+            _enemySpawner.SpawnUnit(spawnPosition, _unitsInitialDirection.localRotation);
         }
     }
 

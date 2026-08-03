@@ -15,7 +15,7 @@ public class UnitRedirectionTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out UnitBase unit) && unit.BattleSide == _whoToRedirect)
         {
-            unit.Movement.RotateUnit(_directionReference.localRotation);
+            unit.Movement.RotateUnit(_directionReference.rotation);
         }
     }
 }

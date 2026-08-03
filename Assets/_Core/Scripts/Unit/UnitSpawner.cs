@@ -18,12 +18,13 @@ public class UnitSpawner : MonoBehaviour
     public UnitBase SpawnUnit(Vector3 position, Quaternion rotation, Action<UnitBase> beforeActivateAction = null)
     {
         IPoolable poolableUnit = ExtractFreeUnit();
-        poolableUnit.Transform.position = position;
-        poolableUnit.Transform.localRotation = rotation;
+        UnitBase unitBase = poolableUnit as UnitBase;
+
+        unitBase.Movement.RotateUnit(rotation);
+        unitBase.Movement.WarpAgent(position);
 
         _activeUnitsPool.Add(poolableUnit);
         
-        UnitBase unitBase = poolableUnit as UnitBase;
         beforeActivateAction?.Invoke(unitBase);
 
         poolableUnit.ActivatePoolable();

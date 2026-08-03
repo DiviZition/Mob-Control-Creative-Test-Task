@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: _whoToAttack
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1210846089631104645, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+      propertyPath: m_WalkableMask
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1789546914253824587, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       propertyPath: m_Layer
       value: 8

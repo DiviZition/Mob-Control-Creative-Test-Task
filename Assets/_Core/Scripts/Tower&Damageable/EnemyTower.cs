@@ -22,7 +22,11 @@ public class EnemyTower : Damageable, IActivatable
         _visual.gameObject.SetActive(false);
     }
 
-    private void OnDrawGizmos() => _enemySpawning.DrawSpawnLine();
+    private void OnDrawGizmos()
+    {
+        _enemySpawning.DrawSpawnLine();
+        _bossSpawning.DrawSpawnLine();
+    }
 
     public void Enable()
     {
