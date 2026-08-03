@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [SelectionBase]
-public class UnitBase : Damageable, IPoolable, IDamageable
+public class UnitBase : Damageable, IPoolable
 {
     [field: SerializeField] public UnitMovement Movement { get; private set; }
     [field: SerializeField] public UnitView View { get; private set; }
