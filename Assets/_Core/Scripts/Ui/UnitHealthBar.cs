@@ -4,23 +4,24 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Damageable _damageable;
     [SerializeField] private Transform _hpBarTransform;
     [SerializeField] private RectMask2D _fillMask;
     [SerializeField] private TMP_Text _healthCounter;
+
+    private Health _health;
 
     private Camera _mainCamera;
 
     private void OnEnable()
     {
         _mainCamera = Camera.main;
-        _damageable.OnTakeDamage += UpdateHPBar;
+        _health.OnHealthChanged += UpdateHPBar;
         UpdateHPBar();
     }
 
     private void OnDisable()
     {
-        _damageable.OnTakeDamage -= UpdateHPBar;
+        _health.OnHealthChanged -= UpdateHPBar;
     }
 
     void LateUpdate()
@@ -32,7 +33,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public void UpdateHPBar() => SetupHPBar(_damageable.MaxHealth, _damageable.CurrentHealth);
+    public void UpdateHPBar(int _ = 0) => SetupHPBar(_health.MaxHealth, _health.CurrentHealth);
     private void SetupHPBar(int maxHp, int currentHP)
     {
         bool isFullHP = currentHP == maxHp;

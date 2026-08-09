@@ -1,9 +1,8 @@
-using R3;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitMassiveSoundPlayer : MonoBehaviour, IActivatable
+public class UnitMassiveSoundPlayer : MonoBehaviour
 {
     [SerializeField] private UnitSpawner _spawnerToObserve;
     [SerializeField] private float _throttleSoundsWindow;
@@ -15,41 +14,41 @@ public class UnitMassiveSoundPlayer : MonoBehaviour, IActivatable
     private IDisposable _dieSoundSubs;
     private Dictionary<UnitBase, Action> _dieSoundsSubCollection = new Dictionary<UnitBase, Action>(1024);
 
-    private void Start() => Enable();
+    //private void Start() => Enable();
 
     public void PlayDieSoundOnUnit(Transform unitsTransform) => _dieSoundPool.PlaySoundOnUnit(unitsTransform);
     public void PlayStepSoundOnUnit(Transform unitsTransform) => _stepSoundPool.PlaySoundOnUnit(unitsTransform);
 
-    public void Enable()
-    {
-        _stepSoundPool.Enable();
-        _dieSoundPool.Enable();
+    //public void Enable()
+    //{
+    //    _stepSoundPool.Enable();
+    //    _dieSoundPool.Enable();
 
-        _stepSoundSub = _spawnerToObserve.OnUnitSpawned
-            .ThrottleFirst(TimeSpan.FromSeconds(_throttleSoundsWindow))
-            .Subscribe(unit => PlayStepSoundOnUnit(unit.Transform));
+    //    _stepSoundSub = _spawnerToObserve.OnUnitSpawned
+    //        .ThrottleFirst(TimeSpan.FromSeconds(_throttleSoundsWindow))
+    //        .Subscribe(unit => PlayStepSoundOnUnit(unit.Transform));
 
-        _dieSoundSubs = _spawnerToObserve.OnUnitSpawned.Subscribe(unit =>
-        {
-            if (_dieSoundsSubCollection.ContainsKey(unit) == false)
-            {
-                Action onDead = () => PlayDieSoundOnUnit(unit.Transform);
-                unit.OnDead += onDead;
-                _dieSoundsSubCollection.Add(unit, onDead);
-            }
-        });
-    }
+    //    _dieSoundSubs = _spawnerToObserve.OnUnitSpawned.Subscribe(unit =>
+    //    {
+    //        if (_dieSoundsSubCollection.ContainsKey(unit) == false)
+    //        {
+    //            Action onDead = () => PlayDieSoundOnUnit(unit.Transform);
+    //            unit.OnDead += onDead;
+    //            _dieSoundsSubCollection.Add(unit, onDead);
+    //        }
+    //    });
+    //}
 
-    public void Disable()
-    {
-        _stepSoundPool.Disable();
-        _dieSoundPool.Disable();
+    //public void Disable()
+    //{
+    //    _stepSoundPool.Disable();
+    //    _dieSoundPool.Disable();
 
-        _stepSoundSub?.Dispose();
-        _dieSoundSubs?.Dispose();
-        foreach (var sub in _dieSoundsSubCollection)
-            sub.Key.OnDead -= sub.Value;
-    }
+    //    _stepSoundSub?.Dispose();
+    //    _dieSoundSubs?.Dispose();
+    //    foreach (var sub in _dieSoundsSubCollection)
+    //        sub.Key.OnDead -= sub.Value;
+    //}
 }
 
 

@@ -11,5 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Core/Scenes/ImporedVersion.unity
     guid: 9c467669a70566643997da9823f7ab1e
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 84ab9b42e558e414a9fd51560252db37, type: 3}
   m_UseUCBPForAssetBundles: 0

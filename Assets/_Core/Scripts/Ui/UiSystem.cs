@@ -19,12 +19,12 @@ public class UiSystem : MonoBehaviour
     }
 
     [ContextMenu("Show Defeated Screen")]
-    public void ShowDefeatedScreen() => PopUpTextScreen(ref _defeatedScreenData);
+    public void ShowDefeatedScreen() => PopUpTextScreenSingle(ref _defeatedScreenData);
 
     [ContextMenu("Show You Won Screen")]
-    public void ShowYouWonScreen() => PopUpTextScreen(ref _youWonScreenData);
+    public void ShowYouWonScreen() => PopUpTextScreenSingle(ref _youWonScreenData);
 
-    public void PopUpTextScreen(ref PopUpTextScreenData data)
+    public void PopUpTextScreenSingle(ref PopUpTextScreenData data)
     {
         HideAllScreens();
         data.Image.transform.localScale = data.StartAnimationSize;
