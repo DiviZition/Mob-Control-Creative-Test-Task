@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5322d9d665c4b741a2420134161c0fe, type: 3}
+  m_Name: PlayerUnitConfig
+  m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
+  <UnitViewPrefab>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 1.3
+  <MaxHealth>k__BackingField: 1
+  <ReturnsDamage>k__BackingField: 1
+  <BattleSide>k__BackingField: 0
+  <Damage>k__BackingField: 1
+  <AttackCooldown>k__BackingField: 0.5
+  <AttackWindUpDelay>k__BackingField: 0
+  <PlayAttackAnimation>k__BackingField: 0

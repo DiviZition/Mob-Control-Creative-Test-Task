@@ -18,7 +18,7 @@ public class GameInit : MonoBehaviour
     [SerializeField] private PlayerTowerView _playerTowerView;
     [SerializeField] private EnemyTowerView _enemyTowerView;
 
-    [SerializeField] private MultiplyingGatesViewsProvider _gatesViesProvider;
+    [SerializeField] private MultiplyingGateSystemViews _gatesViesProvider;
 
     private IInputProvider _inputProvider;
 
@@ -33,7 +33,10 @@ public class GameInit : MonoBehaviour
     private void Awake()
     {
         if (Instance != null)
-            GameObject.Destroy(Instance);//Destroying the old instance becouse of disabled domain recompilation.
+            GameObject.Destroy(Instance);
+        //Destroying the old instance, becouse of disabled domain recompilation.
+        //Statics will not be cilled, so we're replacing the null with the new instance.
+        //Works for prototype, but needs to be overhauled if we're going to go farther.
 
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -44,30 +47,22 @@ public class GameInit : MonoBehaviour
         _inputProvider = new KeyboardInput();
 
         UnitSpawner playerUnitSpawner = new UnitSpawner(_canonView.PlayerUnitConfig);
+        IHealth playerHealth = new Health(1);
 
-        CanonPresenter canonPresenter = new CanonPresenter(_canonView, _canonView.CanonConfig);
-        CanonModel canonModel = new CanonModel(_inputProvider, canonPresenter, _canonView.CanonConfig, PlayerUnitSpawner);
+        CanonModel canonModel = new CanonModel(_inputProvider, _canonView.CanonConfig, PlayerUnitSpawner);
         _updater.Register(canonModel);
         _disposables.Add(playerUnitSpawner);
 
-        Health playerHealth = new Health(1);
-        PlayerTowerPresenter playerTowerPresenter = new PlayerTowerPresenter(playerHealth, _playerTowerView);
-        PlayerTowerModel playerTowerModel = new PlayerTowerModel(playerHealth, playerTowerPresenter);
-        _disposables.Add(playerTowerPresenter);
-        _disposables.Add(playerTowerModel);
+        _playerTowerView.Init(playerHealth);
 
         Health enemyHealth = new Health(100);
-        EnemyTowerPresenter enemyTowerPresenter = new EnemyTowerPresenter(_enemyTowerView, enemyHealth);
-        EnemyTowerModel enemyTowerModel = new EnemyTowerModel(enemyTowerPresenter, enemyHealth);
+        EnemyTowerModel enemyTowerModel = new EnemyTowerModel(enemyHealth, _enemyTowerView.EnemyConfigs, _enemyTowerView.GetSpawnParameters());
+        _enemyTowerView.Init(enemyTowerModel);
         _updater.Register(enemyTowerModel);
-        _disposables.Add(enemyTowerPresenter);
         _disposables.Add(enemyTowerModel);
 
-        MultiplyingGateSystem multiplyingGateSystem = new MultiplyingGateSystem(_gatesViesProvider.GatesViews, playerUnitSpawner);
+        MultiplyingGateSystem multiplyingGateSystem = new MultiplyingGateSystem(playerUnitSpawner);
+        _gatesViesProvider.Init(multiplyingGateSystem);
         _updater.Register(multiplyingGateSystem);
-        _disposables.Add(multiplyingGateSystem);
-
-        GatesUpgradeSystem gatesUpgradeSystem = new GatesUpgradeSystem(_gatesViesProvider.GatesUpgrades, multiplyingGateSystem);
-        _disposables.Add(gatesUpgradeSystem);
     }
 }
