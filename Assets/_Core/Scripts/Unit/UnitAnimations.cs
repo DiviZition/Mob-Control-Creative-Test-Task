@@ -1,9 +1,8 @@
 using PrimeTween;
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class UnitVisual : MonoBehaviour
+public class UnitAnimations : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private UnitAnimationData[] _animations;
@@ -12,20 +11,38 @@ public class UnitVisual : MonoBehaviour
     [SerializeField] private Material _deadMaterial;
     [SerializeField] private SkinnedMeshRenderer _unitMeshRenderer;
 
-    public void SetDeadMaterial() => _unitMeshRenderer.material = _deadMaterial;
-    public void SetNormalMaterial() => _unitMeshRenderer.material = _normalMaterial;
+    private IUnitModel _unitModel;
 
-    public void PlayAnimation(AnimationType animType, Action onAnimEnded = null)
+    public void Init(IUnitModel unitModel)
     {
-        if (TryGetAnimDataIndex(animType, out int animDataIndex) == false)
-            return;
+        _unitModel = unitModel;
+        PlayRunAnimation();
 
-        PlayAnimation(_animations[animDataIndex].StateName);
-        if (onAnimEnded != null)
-            Tween.Delay(_animations[animDataIndex].DeclaredDuration, () => onAnimEnded?.Invoke());
+        _unitModel.Health.OnDead += PlayDeadAnimation;
+        _unitModel.Attack.OnAttackStarted += PlayAttackAnimation;
+        _unitModel.Attack.OnAttackFinished += PlayRunAnimation;
     }
 
-    public void PlayDeadAnimation(Action onAnimEnded = null)
+    private void OnDestroy()
+    {
+        _unitModel.Health.OnDead -= PlayDeadAnimation;
+        _unitModel.Attack.OnAttackStarted -= PlayAttackAnimation;
+        _unitModel.Attack.OnAttackFinished -= PlayRunAnimation;
+    }
+
+    public void PlayRunAnimation()
+    {
+        if (TryGetAnimDataIndex(AnimationType.Run, out int animDataIndex) == false)
+            PlayAnimation(_animations[animDataIndex].StateName);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        if (TryGetAnimDataIndex(AnimationType.Attack, out int animDataIndex) == false)
+            PlayAnimation(_animations[animDataIndex].StateName);
+    }
+
+    public void PlayDeadAnimation()
     {
         if (TryGetAnimDataIndex(AnimationType.Die, out int animDataIndex) == false)
             return;
@@ -37,10 +54,9 @@ public class UnitVisual : MonoBehaviour
         float animDuration = _animations[animDataIndex].DeclaredDuration;
         Sequence.Create()
             .Group(Tween.LocalPositionY(unitTransform, endValue: initialYPos - 0.5f, duration: 5, startDelay: animDuration))
-            .ChainCallback(() => onAnimEnded?.Invoke())
             .ChainCallback(() => SetNormalMaterial());
     }
-    protected void PlayAnimation(string stateName, float transitionDuration = 0.2f) => _animator.CrossFade(stateName, transitionDuration);
+    private void PlayAnimation(string stateName, float transitionDuration = 0.2f) => _animator.CrossFade(stateName, transitionDuration);
 
     private bool TryGetAnimDataIndex(AnimationType animationType, out int index)
     {
@@ -57,6 +73,9 @@ public class UnitVisual : MonoBehaviour
         Debug.LogError($"No animation of type: {animationType} on unit: {this.gameObject.name}");
         return false;
     }
+
+    public void SetDeadMaterial() => _unitMeshRenderer.material = _deadMaterial;
+    public void SetNormalMaterial() => _unitMeshRenderer.material = _normalMaterial;
 
     [Serializable]
     private struct UnitAnimationData

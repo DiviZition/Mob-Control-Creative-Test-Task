@@ -10,14 +10,3 @@ public interface IDamageable
 
     public void TakeDamage(int damage);
 }
-
-public interface IInputProvider
-{
-    float AxisHorizontal { get; }
-    bool IsShooting { get; }
-}
-
-public interface IUpdatable
-{
-    void UpdateLogic(float deltaTime);
-}

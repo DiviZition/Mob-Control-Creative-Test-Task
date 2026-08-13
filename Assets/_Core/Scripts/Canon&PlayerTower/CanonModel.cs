@@ -1,6 +1,6 @@
 using System;
 
-public class CanonModel : Disablable, ICanonModel
+public class CanonModel : Lockable, ICanonModel
 {
     public ICanonMovement Movement { get; private set; }
     public ICanonShooter Shooter { get; private set; }

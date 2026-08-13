@@ -33,18 +33,18 @@ public class Health : IHealth
         if (IsDead)
             return;
 
-        int currentHealthSnapshot = CurrentHealth;
+        //int currentHealthSnapshot = CurrentHealth;
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
         if (CurrentHealth <= 0)
             OnDead?.Invoke();
 
-        OnHealthChanged?.Invoke(currentHealthSnapshot, CurrentHealth);
+        OnHealthChanged?.Invoke(MaxHealth, CurrentHealth);
     }
 
     public void ResetCurrentHealth() => SetCurrentHealth(MaxHealth);
     public void SetCurrentHealth(int currentHealth)
     {
-        OnHealthChanged?.Invoke(CurrentHealth, currentHealth);
         CurrentHealth = currentHealth;
+        OnHealthChanged?.Invoke(MaxHealth, CurrentHealth);
     }
 }

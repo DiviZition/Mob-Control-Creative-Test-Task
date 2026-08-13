@@ -8,6 +8,6 @@ public class UnitSetSpeedZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out IUnitView unit) && unit.BattleSide == _whoToAffect)
-            unit.CallChangeMoveSpeed(_newSpeed);
+            unit.Movement_SetSpeed(_newSpeed);
     }
 }

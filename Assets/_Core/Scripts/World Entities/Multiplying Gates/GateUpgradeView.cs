@@ -2,6 +2,14 @@ using MoreMountains.Feedbacks;
 using System;
 using UnityEngine;
 
+public interface IGateUpgradeView
+{
+    public int ValueToApply { get; }
+    public bool IsMultiplying { get; }
+
+    public event Action<int, bool> OnUpgradePicked;
+}
+
 public class GateUpgradeView : MonoBehaviour, IGateUpgradeView
 {
     [SerializeField] private Collider _collider;
@@ -21,12 +29,4 @@ public class GateUpgradeView : MonoBehaviour, IGateUpgradeView
             _pickUpEffect.PlayFeedbacks();
         }
     }
-}
-
-public interface IGateUpgradeView
-{
-    public int ValueToApply { get; }
-    public bool IsMultiplying { get; }
-
-    public event Action<int, bool> OnUpgradePicked;
 }

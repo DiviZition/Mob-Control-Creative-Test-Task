@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IUpdatable
+{
+    void UpdateLogic(float deltaTime);
+}
+
 public class ModelsUpdater : MonoBehaviour
 {
     private readonly List<IUpdatable> _updatables = new(128);

@@ -11,8 +11,8 @@ public class GameInit : MonoBehaviour
     [SerializeField] private List<IDisposable> _disposables = new(8);
 
     [SerializeField] private UiSystem _uiSystem;
-    [SerializeField] private DamageableView _playerTower;
-    [SerializeField] private DamageableView _enemyTower;
+    [SerializeField] private RoadBlock _playerTower;
+    [SerializeField] private RoadBlock _enemyTower;
 
     [SerializeField] private CanonView _canonView;
     [SerializeField] private PlayerTowerView _playerTowerView;

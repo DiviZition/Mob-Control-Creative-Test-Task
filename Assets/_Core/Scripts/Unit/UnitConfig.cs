@@ -13,6 +13,7 @@ public class UnitConfig : ScriptableObject
 
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public float AttackCooldown { get; private set; }
-    [field: SerializeField] public float AttackWindUpDelay { get; private set; }
+    [field: SerializeField] public float AttackWindUpDuration { get; private set; }
+    [field: SerializeField] public float AttackStunDuration { get; private set; }
     [field: SerializeField] public bool PlayAttackAnimation { get; private set; }
 }

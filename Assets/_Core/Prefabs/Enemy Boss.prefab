@@ -884,7 +884,7 @@ PrefabInstance:
       addedObject: {fileID: 8682051754641195902}
     - targetCorrespondingSourceObject: {fileID: 3568578334628208978, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2594500998361616224}
+      addedObject: {fileID: 9102266884115055224}
   m_SourcePrefab: {fileID: 100100000, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
 --- !u!95 &1623292797636786583 stripped
 Animator:
@@ -913,11 +913,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5757bf887b92ec4d84631040583dc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  _damageable: {fileID: 3905971313327320443}
   _hpBarTransform: {fileID: 2463314654207835496}
   _fillMask: {fileID: 868817047530394559}
   _healthCounter: {fileID: 5233890541694950782}
---- !u!114 &2594500998361616224
+--- !u!114 &9102266884115055224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -926,29 +925,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2256045248105248134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbc0b6ff0837a5b49b8317afcf0d7688, type: 3}
+  m_Script: {fileID: 11500000, guid: d0fa8ab7e45734941bbe63d74301e91e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossUnitAttacker
-  _damage: 10
-  _attackRadius: 0.55
-  _attackCoolDown: 0.2
-  _unitToHitMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _unitBase: {fileID: 3905971313327320443}
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarToUnitConnector
+  _healthBar: {fileID: 0}
+  _unitView: {fileID: 0}
 --- !u!4 &3882034514570895454 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1952020129158263946, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
   m_PrefabInstance: {fileID: 3371285331527472340}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3905971313327320443 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1800870386998688175, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
-  m_PrefabInstance: {fileID: 3371285331527472340}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2256045248105248134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6308298b3867bd147b95a28de9035425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitBase

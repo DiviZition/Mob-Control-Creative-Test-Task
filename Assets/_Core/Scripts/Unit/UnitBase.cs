@@ -1,39 +1,4 @@
 using System;
-using UnityEngine;
-using UnityEngine.AI;
-
-public class UnitView : MonoBehaviour, IUnitView
-{
-    [field: SerializeField] public UnitVisual Visual { get; private set; }
-    [field: SerializeField] public UnitAttackView AttackView { get; private set; }
-    [field: SerializeField] public UnitMovementView MovementView { get; private set; }
-    [field: SerializeField] public Collider Collider { get; private set; }
-    [field: SerializeField] public NavMeshAgent Agent { get; private set; }
-    [field: SerializeField] public Transform Transform { get; private set; }
-
-    public IUnitModel UnitModel { get; private set; }
-    public UnitBattleSide BattleSide => UnitModel.Config.BattleSide;
-    public bool ReturnsDamage => UnitModel.Config.ReturnsDamage;
-
-    public bool IsDead => UnitModel.Health.IsDead;
-
-    public void Init(IUnitModel unitModel)
-    {
-        MovementView.Init(unitModel.Movement);
-        AttackView.Init(unitModel.Attack);
-    }
-
-    void IDamageable.TakeDamage(int damage) => UnitModel.Health.TakeDamage(damage);
-
-    public void SetViewEnabled(bool isEnabled) => gameObject.SetActive(isEnabled);
-    public void SetCollisionEnabled(bool isEnabled) => Collider.enabled = isEnabled;
-}
-
-public interface IUnitView : IDamageable
-{
-    public IUnitModel UnitModel { get; }
-    public void SetViewEnabled(bool isEnabled);
-}
 
 public interface IUnitModel : IUpdatable, IDisposable
 {
@@ -41,6 +6,8 @@ public interface IUnitModel : IUpdatable, IDisposable
     public IUnitMovement Movement { get; }
     public IUnitAttack Attack { get; }
     public UnitConfig Config { get; }
+
+    public void ReturnUnitToPool();
 }
 
 public class UnitBase : IUnitModel
@@ -62,11 +29,11 @@ public class UnitBase : IUnitModel
         Movement = movement;
         Attack = attack;
 
-        _health.OnDead += PerformDeath;
+        _health.OnDead += ReturnUnitToPool;
 
-        Attack.OnAttackStarted += Movement.Disable;
+        Attack.OnAttackStarted += Movement.Unlock;
         //Call for the animation when OnAttackStarted fired
-        Attack.OnAttackFinished += Movement.Enable;
+        Attack.OnAttackFinished += Movement.Lock;
     }
 
     public void UpdateLogic(float deltaTime)
@@ -84,7 +51,7 @@ public class UnitBase : IUnitModel
 
         Movement.ResetToInitialState();
         Movement.ForceRemoveAllLockers();
-        Movement.Enable();
+        Movement.Lock();
 
         Attack.Enable();
 
@@ -95,11 +62,11 @@ public class UnitBase : IUnitModel
     {
         IsDisabled = true;
 
-        Movement.Disable();
+        Movement.Unlock();
         Attack.Disable();
     }
 
-    private void PerformDeath()
+    public void ReturnUnitToPool()
     {
         DisableUnit();
         _spawner.DeactivateUnit(this);
@@ -107,10 +74,10 @@ public class UnitBase : IUnitModel
 
     public void Dispose()
     {
-        _health.OnDead -= PerformDeath;
+        _health.OnDead -= ReturnUnitToPool;
 
-        Attack.OnAttackStarted -= Movement.Disable;
-        Attack.OnAttackFinished -= Movement.Enable;
+        Attack.OnAttackStarted -= Movement.Unlock;
+        Attack.OnAttackFinished -= Movement.Lock;
     }
 }
 

@@ -20,7 +20,7 @@ public class UnitRedirectionTrigger : MonoBehaviour
             if (_rotationDirection == Quaternion.identity)
                 _rotationDirection = _directionReference.rotation;
 
-            unit.CallChangeMoveDirection(_rotationDirection);
+            unit.Movement_SetDirection(_rotationDirection);
         }
     }
 }

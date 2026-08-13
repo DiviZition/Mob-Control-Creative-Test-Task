@@ -45,7 +45,6 @@ public class UnitSpawner : IUpdatable, IDisposable
     public void DeactivateUnit(UnitBase unit, bool triggerOnDespawnedEvent = true)
     {
         unit.DisableUnit();
-        unit.DisableView();
         _activeUnitsPool.Remove(unit);
         _deactivatedUnitsPool.Push(unit);
 
@@ -82,6 +81,7 @@ public class UnitSpawner : IUpdatable, IDisposable
 
         UnitBase unitBase = new UnitBase(this, unitHealth, unitMovement, unitAttack, _unitConfig);
         unitView.Init(unitBase);
+        unitView.SetViewEnabled(false);
         unitBase.DisableUnit();
 
         _deactivatedUnitsPool.Push(unitBase);

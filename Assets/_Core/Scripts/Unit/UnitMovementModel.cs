@@ -1,37 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
-
-public class UnitMovementView : MonoBehaviour
-{
-    private IUnitMovement _movementModel;
-    private NavMeshAgent _agent;
-    private Transform _tranform;
-
-    public void Init(IUnitMovement movementModel)
-    {
-        _movementModel = movementModel;
-
-        _movementModel.OnChangeDirection += RotateUnit;
-        _movementModel.OnTeleportToPosition += WarpToPosition;
-    }
-
-    private void OnDestroy()
-    {
-        _movementModel.OnChangeDirection -= RotateUnit;
-        _movementModel.OnTeleportToPosition -= WarpToPosition;
-    }
-
-    private void FixedUpdate()
-    {
-        if (_movementModel.IsDisabled == false)
-            _agent.Move(_movementModel.MoveDirectionVelocity);
-    }
-
-    private void WarpToPosition(Vector3 vector) => _agent.Warp(vector);
-    private void RotateUnit(Quaternion quaternion) => _tranform.localRotation = quaternion;
-}
 
 public interface IUnitMovement : ILockable
 {
@@ -47,37 +16,7 @@ public interface IUnitMovement : ILockable
     public event Action<Quaternion> OnChangeDirection;
 }
 
-public interface ILockable
-{
-    public bool IsDisabled { get; }
-    public void ForceRemoveAllLockers();
-    public void Enable();
-    public void Disable();
-}
-
-public class Disablable : ILockable
-{
-    private byte _lockersCount;
-
-    public bool IsDisabled => _lockersCount > 0;
-
-    /// <summary>
-    /// Just cleans the lockers list, so IsDisabled will become false anyways
-    /// </summary>
-    public virtual void ForceRemoveAllLockers() => _lockersCount = 0;
-
-    /// <summary>
-    /// Removes the locker from the lockers list. IsDisabled will become false, only when there are no lockers left.
-    /// </summary>
-    public virtual void Enable() => _lockersCount = Math.Clamp(_lockersCount, (byte)0, byte.MaxValue);
-
-    /// <summary>
-    /// Locks IsDisabled with one locker. IsDisabled will stay in true state until at least 1 loker is registered
-    /// </summary>
-    public virtual void Disable() => _lockersCount++;
-}
-
-public class UnitMovementModel : Disablable, IUnitMovement
+public class UnitMovementModel : Lockable, IUnitMovement
 {
     [SerializeField] private float _initialMoveSpeed;
 

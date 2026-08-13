@@ -4,7 +4,15 @@ using UnityEngine;
 public class HealthCounterView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _counterText;
-    [SerializeField] private DamageableView _damageable;
+    private IHealth _health;
 
-    public void UpdateTheCounter(int currentHealth) => _counterText.text = currentHealth.ToString();
+    public void Init(IHealth health)
+    {
+        _health = health;
+        _health.OnHealthChanged += UpdateTheCounter;
+    }
+
+    private void OnDestroy() => _health.OnHealthChanged -= UpdateTheCounter;
+
+    public void UpdateTheCounter(int _ = 0, int currentHealth = 0) => _counterText.text = currentHealth.ToString();
 }

@@ -8,35 +8,32 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private RectMask2D _fillMask;
     [SerializeField] private TMP_Text _healthCounter;
 
-    private Health _health;
+    private Transform _cameraTransform;
+    private IHealth _health;
 
-    private Camera _mainCamera;
-
-    private void OnEnable()
+    public void Init(IHealth health)
     {
-        _mainCamera = Camera.main;
-        _health.OnHealthChanged += UpdateHPBar;
-        UpdateHPBar();
+        _health = health;
+
+        _cameraTransform = Camera.main.transform;
+        _health.OnHealthChanged += SetupHPBar;
     }
 
-    private void OnDisable()
-    {
-        _health.OnHealthChanged -= UpdateHPBar;
-    }
+    private void OnEnable() => SetupHPBar(1, 1);
+    private void OnDestroy() => _health.OnHealthChanged -= SetupHPBar;
 
     void LateUpdate()
     {
         // Billboard effect: face the camera
-        if (_mainCamera != null)
+        if (_cameraTransform != null)
         {
-            _hpBarTransform.forward = _mainCamera.transform.forward;
+            _hpBarTransform.forward = _cameraTransform.forward;
         }
     }
 
-    public void UpdateHPBar(int _ = 0) => SetupHPBar(_health.MaxHealth, _health.CurrentHealth);
-    private void SetupHPBar(int maxHp, int currentHP)
+    private void SetupHPBar(int maxHP, int currentHP)
     {
-        bool isFullHP = currentHP == maxHp;
+        bool isFullHP = currentHP == maxHP;
         _hpBarTransform.gameObject.SetActive(isFullHP == false);
 
         if (isFullHP == true || _fillMask == null)
@@ -44,7 +41,7 @@ public class HealthBar : MonoBehaviour
 
         _healthCounter.text = currentHP.ToString();
 
-        float ratio = (float)currentHP / (float)maxHp;
+        float ratio = (float)currentHP / (float)maxHP;
         // Calculate how much to hide (in pixels)
         float hiddenWidth = _fillMask.rectTransform.rect.width * (1f - ratio);
         // Apply it to the left padding

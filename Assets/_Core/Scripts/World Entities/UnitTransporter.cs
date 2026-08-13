@@ -39,7 +39,7 @@ public class UnitTransporter : MonoBehaviour
 
     public void PlaceUnitInTube(IUnitView unit)
     {
-        unit.CallDisableMovement();
+        unit.Movement_Lock();
 
         Tween.Position(unit.Transform, _enterPosition.position, duration: 0.5f, ease: Ease.OutCubic);
         Tween.Delay(duration: 0.3f, () => unit.SetViewEnabled(false));
@@ -60,9 +60,9 @@ public class UnitTransporter : MonoBehaviour
     {
         _tubeExitFeedback.PlayFeedbacks();
 
-        unitView.CallSetNewPosition(_exitPosition.position);
-        unitView.CallChangeMoveDirection(_exitPosition.rotation);
-        unitView.CallEnableMovement();
+        unitView.Movement_SetPosition(_exitPosition.position);
+        unitView.Movement_SetDirection(_exitPosition.rotation);
+        unitView.Movement_UnLock();
 
         unitView.SetViewEnabled(true);
     }
