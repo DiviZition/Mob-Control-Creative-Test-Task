@@ -10,6 +10,7 @@ public class CanonView : MonoBehaviour
     [field: SerializeField] public MMF_Player ShootEffect {  get; private set; }
 
     [SerializeField] private CanonSettingsConfig _config;
+    private Vector3 _canonPositionForGizmos;
 
     public ICanonModel _canonModel;
 
@@ -19,13 +20,17 @@ public class CanonView : MonoBehaviour
         _canonModel.Shooter.OnCanonShoot += PlayShootEffect;
     }
 
-    private void OnDestroy() => _canonModel.Shooter.OnCanonShoot += PlayShootEffect;
+    private void OnDestroy()
+    {
+        if (_canonModel != null)
+            _canonModel.Shooter.OnCanonShoot += PlayShootEffect;
+    }
 
     private void Update()
     {
         if (_canonModel == null || _canonModel.IsDisabled) return;
 
-        Transform.localPosition = _canonModel.Movement.CurrentPosition;
+        Transform.position = _canonModel.Movement.CurrentPosition;
     }
 
     public void PlayShootEffect()
@@ -39,11 +44,14 @@ public class CanonView : MonoBehaviour
     {
         if (_config == null) return;
 
+        if (Application.isPlaying == false)
+            _canonPositionForGizmos = Transform.position;
+
         Gizmos.color = Color.purple;
-        Vector3 rayStartPosition = Transform.localPosition.ResetX(_config.LocalMoveBounds * -1);
+        Vector3 rayStartPosition = _canonPositionForGizmos + (Vector3.right * _config.LocalMoveBounds * -1);
         Gizmos.DrawRay(rayStartPosition, Vector3.right * _config.LocalMoveBounds * 2);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Transform.localPosition + _config.ShootPositionOffset, 0.1f);
+        Gizmos.DrawWireSphere(Transform.position + _config.ShootPositionOffset, _config.ShootSpread);
     }
 }

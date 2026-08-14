@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5322d9d665c4b741a2420134161c0fe, type: 3}
   m_Name: PlayerUnitConfig
   m_EditorClassIdentifier: Assembly-CSharp::UnitConfig
-  <UnitViewPrefab>k__BackingField: {fileID: 0}
-  <MoveSpeed>k__BackingField: 1.3
+  <UnitViewPrefab>k__BackingField: {fileID: 4005900893286946087, guid: 0fb7b7dd61afe2745af3924f2b4ab7b3, type: 3}
+  <MoveSpeed>k__BackingField: 5
   <MaxHealth>k__BackingField: 1
   <ReturnsDamage>k__BackingField: 1
   <BattleSide>k__BackingField: 0
   <Damage>k__BackingField: 1
   <AttackCooldown>k__BackingField: 0.5
-  <AttackWindUpDelay>k__BackingField: 0
+  <AttackWindUpDuration>k__BackingField: 0
+  <AttackStunDuration>k__BackingField: 0
   <PlayAttackAnimation>k__BackingField: 0

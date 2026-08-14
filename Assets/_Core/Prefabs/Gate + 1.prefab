@@ -198,11 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3202fcfac551dca45a3bb1c69ea1b803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateUpgradePicker
-  _gatesUpgrader: {fileID: 0}
   _collider: {fileID: 124066553671621756}
-  _valueToApply: 1
-  _isMultiplying: 0
   _pickUpEffect: {fileID: 284261110384602918}
+  <ValueToApply>k__BackingField: 1
+  <IsMultiplying>k__BackingField: 0
 --- !u!65 &124066553671621756
 BoxCollider:
   m_ObjectHideFlags: 0

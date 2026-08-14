@@ -25,10 +25,12 @@ public class UnitMovementView : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_movementModel.IsDisabled == false)
+        if (_agent.enabled == true && _movementModel.IsDisabled == false)
             _agent.Move(_movementModel.MoveDirectionVelocity);
     }
 
+    public void Disable() => _agent.enabled = false;
+    public void Enable() => _agent.enabled = true;
     private void WarpToPosition(Vector3 vector) => _agent.Warp(vector);
-    private void RotateUnit(Quaternion quaternion) => _tranform.localRotation = quaternion;
+    private void RotateUnit(Quaternion quaternion) => _tranform.rotation = quaternion;
 }

@@ -1,4 +1,13 @@
 using System;
+using UnityEngine;
+
+public interface ICanonModel : IUpdatable, ILockable
+{
+    public ICanonMovement Movement { get; }
+    public ICanonShooter Shooter { get; }
+    public CanonSettingsConfig Config { get; }
+}
+
 
 public class CanonModel : Lockable, ICanonModel
 {
@@ -9,12 +18,12 @@ public class CanonModel : Lockable, ICanonModel
 
     public CanonSettingsConfig Config { get; private set; }
 
-    public CanonModel(IInputProvider input, CanonSettingsConfig config, UnitSpawner unitSpawner)
+    public CanonModel(IInputProvider input, CanonSettingsConfig config, UnitSpawner unitSpawner, Vector3 canonInitialPosition)
     {
         _input = input;
         Config = config;
 
-        Movement = new CanonMovement(config, _input);
+        Movement = new CanonMovement(config, _input, canonInitialPosition);
         Shooter = new CanonShooter(config, _input, unitSpawner, Movement);
     }
 

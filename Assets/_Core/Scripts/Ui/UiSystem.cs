@@ -3,7 +3,13 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiSystem : MonoBehaviour
+public interface IUISystemView
+{
+    public void ShowDefeatedScreen();
+    public void ShowYouWonScreen();
+}
+
+public class UiSystem : MonoBehaviour, IUISystemView
 {
     [SerializeField] private AudioSource _soundSource;
 
@@ -24,7 +30,7 @@ public class UiSystem : MonoBehaviour
     [ContextMenu("Show You Won Screen")]
     public void ShowYouWonScreen() => PopUpTextScreenSingle(ref _youWonScreenData);
 
-    public void PopUpTextScreenSingle(ref PopUpTextScreenData data)
+    private void PopUpTextScreenSingle(ref PopUpTextScreenData data)
     {
         HideAllScreens();
         data.Image.transform.localScale = data.StartAnimationSize;

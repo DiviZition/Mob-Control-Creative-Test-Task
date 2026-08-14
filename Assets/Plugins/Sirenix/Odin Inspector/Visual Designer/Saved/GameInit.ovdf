@@ -1,0 +1,63 @@
+OVDF v1.1
+GameInit, Assembly-CSharp
+MetaGuid:6b8bd605ae52e3d4d8047e0f798b562f
+
+# $EjM36NKUFTJ4nWVWx5irP9
+Position: $root:19
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Views"
+	LabelText = "VIEWS"
+	ShowLabel = True
+	CenterLabel = False
+
+# $SyF13R11NT6RXL8SjWgfbj
+Position: $root:2
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "CernelSystems"
+	CenterLabel = False
+	ShowLabel = True
+	LabelText = "CERNEL"
+
+# _enemyTowerView
+Position: $EjM36NKUFTJ4nWVWx5irP9:2
+
+# _gatesViesProvider
+Position: $EjM36NKUFTJ4nWVWx5irP9:3
+
+# _playerTowerView
+Position: $EjM36NKUFTJ4nWVWx5irP9:1
+
+# _canonView
+Position: $EjM36NKUFTJ4nWVWx5irP9:0
+
+# InitGame()
+Position: $root:20
+Visibility: Shown
++ [Sirenix.OdinInspector.ButtonAttribute]
+	buttonHeight = 30
+	HasDefinedButtonHeight = True
+	Icon = PlayBtnFill
+	Name = "INIT GAME"
+	buttonAlignment = 0
+	HasDefinedButtonAlignment = True
+	stretch = True
+	HasDefinedStretch = True
+	Expanded = True
+	DisplayParameters = True
+	DirtyOnClick = True
+	drawResult = False
+	drawResultIsSet = True
+
+# _updater
+Position: $SyF13R11NT6RXL8SjWgfbj:0
+
+# _uiSystem
+Position: $SyF13R11NT6RXL8SjWgfbj:1
+
+# _autoRun
+Position: $root:1
++ [Sirenix.OdinInspector.LabelTextAttribute]
+	Text = "AUTO RUN"
+	NicifyText = True
+	Icon = ArrowReturnRight
+	IconColor = "RGBA(0.000, 1.700, 1.700, 1.000)"

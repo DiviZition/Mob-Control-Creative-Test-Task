@@ -7,7 +7,7 @@ public class EnemyTowerView : MonoBehaviour
     [SerializeField] private Transform _transform;
     [SerializeField] private Transform _unitSpawnOrigin;
     [SerializeField] private Transform _unitsContainer;
-    [SerializeField] private float _unitSpawnPositionOffset;
+    [SerializeField] private float _unitSpawnPositionRadius;
 
     [SerializeField] private Collider _collider;
     [SerializeField] private HealthCounterView _healthCounterUpdater;
@@ -27,11 +27,14 @@ public class EnemyTowerView : MonoBehaviour
 
     private void OnDestroy()
     {
-        _enemyTowerModel.Health.OnHealthChanged -= TryPlayHitEffectOnHealthChanged;
-        _enemyTowerModel.Health.OnDead -= Deactivate;
+        if (_enemyTowerModel != null)
+        {
+            _enemyTowerModel.Health.OnHealthChanged -= TryPlayHitEffectOnHealthChanged;
+            _enemyTowerModel.Health.OnDead -= Deactivate;
+        }
     }
 
-    public UnitSpawnParameters GetSpawnParameters() => new UnitSpawnParameters(_unitSpawnOrigin, _unitSpawnPositionOffset, _unitsContainer);
+    public UnitSpawnParameters GetSpawnParameters() => new UnitSpawnParameters(_unitSpawnOrigin, _unitSpawnPositionRadius, _unitsContainer);
 
     public void TryPlayHitEffectOnHealthChanged(int maxHealth, int newHealth)
     {
@@ -58,6 +61,6 @@ public class EnemyTowerView : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_unitSpawnOrigin.position, _unitSpawnPositionOffset);
+        Gizmos.DrawWireSphere(_unitSpawnOrigin.position, _unitSpawnPositionRadius);
     }
 }

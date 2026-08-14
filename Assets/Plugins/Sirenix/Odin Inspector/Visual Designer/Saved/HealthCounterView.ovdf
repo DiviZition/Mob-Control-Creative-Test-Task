@@ -1,0 +1,6 @@
+OVDF v1.1
+HealthCounterView, Assembly-CSharp
+MetaGuid:3e4be6245747fe54fb854d8736e34ca2
+
+# UpdateTheCounter(int, int)
+Visibility: Hidden

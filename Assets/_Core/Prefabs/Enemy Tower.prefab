@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &74733966130602105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4386726406532611396}
+  m_Layer: 0
+  m_Name: Units Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4386726406532611396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74733966130602105}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5770339568917202669}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &160917826589965225
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,37 +63,6 @@ Transform:
   - {fileID: 9200695306668305678}
   - {fileID: 6930630987396634279}
   m_Father: {fileID: 2781906260672699116}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1196044579361104816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2530589348124379135}
-  m_Layer: 0
-  m_Name: Bosses Left Spawn Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2530589348124379135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196044579361104816}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5000002, y: 0, z: -1.3899997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6679083636395379971}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1323965978023511762
 GameObject:
@@ -921,9 +921,8 @@ GameObject:
   - component: {fileID: 5770339568917202669}
   - component: {fileID: 7934985445429312472}
   - component: {fileID: 6048265173617218604}
-  - component: {fileID: 5156238899418917735}
+  - component: {fileID: 3759652633080504701}
   - component: {fileID: 1998993103735171296}
-  - component: {fileID: 8049384633374322179}
   m_Layer: 0
   m_Name: Enemy Tower
   m_TagString: Untagged
@@ -945,10 +944,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2781906260672699116}
-  - {fileID: 6679083636395379971}
   - {fileID: 4295754175866754458}
   - {fileID: 1567578282942751095}
   - {fileID: 6380130665909136896}
+  - {fileID: 4386726406532611396}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7934985445429312472
@@ -988,7 +987,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.76, y: 2.4, z: 1.31}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5156238899418917735
+--- !u!114 &3759652633080504701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -997,195 +996,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3041950734071920619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690dd1388441b084d9e152b3b5155366, type: 3}
+  m_Script: {fileID: 11500000, guid: 078647384c2897845bade871d7882f34, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyTower
-  <MaxHealth>k__BackingField: 50
-  <BattleSide>k__BackingField: 1
-  <ReturnsDamage>k__BackingField: 1
-  <Transform>k__BackingField: {fileID: 5770339568917202669}
-  _bossSpawning:
-    _enemySpawner: {fileID: 8228677796550593509}
-    _timeToMaxPower: 40
-    _enemySpawnPerSecond: 1
-    _enemySpawnDelay: 1
-    _enemySpawnedMultiplyer:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -12.684869
-        outSlope: -12.684869
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.08253596
-        value: -0.046957817
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.2620325
-        value: 1.0330734
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.3807307
-        value: -0.031303763
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.56790984
-        value: 1.0435085
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.74139297
-        value: -0.049566627
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 4.0585384
-        outSlope: 4.0585384
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _unitsInitialDirection: {fileID: 1567578282942751095}
-    _spawnLeftEndPoint: {fileID: 2530589348124379135}
-    _spawnLength: 3
-  _enemySpawning:
-    _enemySpawner: {fileID: 8012684306464218916}
-    _timeToMaxPower: 15
-    _enemySpawnPerSecond: 1
-    _enemySpawnDelay: 0.15
-    _enemySpawnedMultiplyer:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: -0.05625528
-        value: 0.90502214
-        inSlope: 0.11736767
-        outSlope: 0.11736767
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.5342244
-      - serializedVersion: 3
-        time: 0.033547316
-        value: 1.4180298
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.08810538
-        value: 0.9511962
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.08046756
-      - serializedVersion: 3
-        time: 0.14627555
-        value: 1.4854472
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.25679228
-        value: 0.88766336
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.3157857
-        value: 2.3045528
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.45690602
-        value: 4.150566
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.65714127
-        value: 5.172867
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.907689
-        value: 0.88209796
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 6
-        inSlope: 55.441936
-        outSlope: 55.441936
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    _unitsInitialDirection: {fileID: 1567578282942751095}
-    _spawnLeftEndPoint: {fileID: 4474685708212327559}
-    _spawnLength: 5.44
-  _visual: {fileID: 2781906260672699116}
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTowerView
+  _transform: {fileID: 5770339568917202669}
+  _unitSpawnOrigin: {fileID: 1567578282942751095}
+  _unitsContainer: {fileID: 4295754175866754458}
+  _unitSpawnPositionRadius: 1
+  _collider: {fileID: 6048265173617218604}
+  _healthCounterUpdater: {fileID: 1998993103735171296}
+  _onHitEffect: {fileID: 4595231482671131348}
+  <EnemyConfigs>k__BackingField:
+  - {fileID: 11400000, guid: 08e70e481d9ba2b42a7fb1094349990d, type: 2}
+  - {fileID: 11400000, guid: fe0b291c204b3664cbd2574fa8e4044e, type: 2}
 --- !u!114 &1998993103735171296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1193,28 +1016,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3041950734071920619}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e4be6245747fe54fb854d8736e34ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthCounter
   _counterText: {fileID: 1890581402254339993}
-  _damageable: {fileID: 5156238899418917735}
---- !u!114 &8049384633374322179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3041950734071920619}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b8687412612d1d41a57238503325131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FeelVFXOnDamageTaken
-  _feelPlayer: {fileID: 4595231482671131348}
-  _damageable: {fileID: 5156238899418917735}
-  _resetFeelPlayer: 1
 --- !u!1 &3555486062594521615
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,37 +1355,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &4739504219263854857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4474685708212327559}
-  m_Layer: 0
-  m_Name: Units Left Spawn Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4474685708212327559
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4739504219263854857}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.78, y: 0, z: -0.69}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4295754175866754458}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4829930541800647022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,53 +1769,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5991671341365333775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6679083636395379971}
-  - component: {fileID: 8228677796550593509}
-  m_Layer: 0
-  m_Name: Boss Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6679083636395379971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5991671341365333775}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2530589348124379135}
-  m_Father: {fileID: 5770339568917202669}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8228677796550593509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5991671341365333775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f34dba12ff6344fb78dd0daaa275e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitSpawner
-  _unitPrefab: {fileID: 3905971313327320443, guid: 0e911106e5fa7a44d96bd50dba581f91, type: 3}
-  _unitsContainer: {fileID: 6679083636395379971}
 --- !u!1 &6337070983176101803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,7 +1795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6337070983176101803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.70710677, y: 0.000000029802322, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: -0.000000029802322, z: 0.000000029802322, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.533, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7117,9 +6846,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4295754175866754458}
-  - component: {fileID: 8012684306464218916}
   m_Layer: 0
-  m_Name: Units Spawner
+  m_Name: Units Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7137,24 +6865,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4474685708212327559}
+  m_Children: []
   m_Father: {fileID: 5770339568917202669}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8012684306464218916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7365343330713964521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f34dba12ff6344fb78dd0daaa275e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitSpawner
-  _unitPrefab: {fileID: 4126885325432464567, guid: 6c1a2a53ff9321c45b9fe2210a99af76, type: 3}
-  _unitsContainer: {fileID: 4295754175866754458}
 --- !u!1 &7420698943519704104
 GameObject:
   m_ObjectHideFlags: 0
@@ -7165,7 +6878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1567578282942751095}
   m_Layer: 0
-  m_Name: Units Initial Direction
+  m_Name: Units Spawn Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7179,8 +6892,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7420698943519704104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000017881393}
-  m_LocalPosition: {x: -0, y: 0, z: -0.8}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000032782555}
+  m_LocalPosition: {x: 0.0000009536743, y: -0.000000018626451, z: -0.8000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

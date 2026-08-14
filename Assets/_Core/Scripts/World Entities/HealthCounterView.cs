@@ -9,10 +9,16 @@ public class HealthCounterView : MonoBehaviour
     public void Init(IHealth health)
     {
         _health = health;
-        _health.OnHealthChanged += UpdateTheCounter;
+        _health.OnHealthChanged += CounterUpdateRetranslate;
+        UpdateTheCounter(_health.MaxHealth);
     }
 
-    private void OnDestroy() => _health.OnHealthChanged -= UpdateTheCounter;
+    private void OnDestroy()
+    {
+        if (_health != null)
+            _health.OnHealthChanged -= CounterUpdateRetranslate;
+    }
 
-    public void UpdateTheCounter(int _ = 0, int currentHealth = 0) => _counterText.text = currentHealth.ToString();
+    public void CounterUpdateRetranslate(int maxHealth, int currentHealth) => UpdateTheCounter(currentHealth);
+    public void UpdateTheCounter(int currentHealth = 0) => _counterText.text = currentHealth.ToString();
 }

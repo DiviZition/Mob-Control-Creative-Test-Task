@@ -126,7 +126,7 @@ public partial class @MainGameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""ab1c1192-90c9-4d5b-88c8-0c8e25fcb959"",
-                    ""path"": ""<Keyboard>/l"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

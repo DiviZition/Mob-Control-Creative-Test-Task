@@ -14,7 +14,9 @@ public class ModelsUpdater : MonoBehaviour
     {
         float dt = Time.deltaTime;
         for (int i = 0; i < _updatables.Count; i++)
+        {
             _updatables[i].UpdateLogic(dt);
+        }
     }
 
     public void Register(IUpdatable model) => _updatables.Add(model);
@@ -28,4 +30,6 @@ public class ModelsUpdater : MonoBehaviour
         _updatables[index] = _updatables[last];
         _updatables.RemoveAt(last);
     }
+
+    public void UnregisterAll() => _updatables.Clear();
 }

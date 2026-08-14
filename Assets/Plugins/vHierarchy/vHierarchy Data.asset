@@ -516,7 +516,7 @@ MonoBehaviour:
           iconNameOrGuid: Folder Icon
           isIconRecursive: 0
           isColorRecursive: 0
-        - colorIndex: 3
+        - colorIndex: 0
           iconNameOrGuid: AudioSource Icon
           isIconRecursive: 0
           isColorRecursive: 0

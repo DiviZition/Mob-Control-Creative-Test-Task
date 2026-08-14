@@ -10,8 +10,6 @@ public class HordsUnitsSpawner : IUpdatable, IDisposable
     private float _timer;
     public bool IsStopped { get; set; }
 
-    private Vector3 SpawnPosition => _parameters.UnitSpawnPosition + (Random.insideUnitSphere * _parameters.SpawnPositionOffset).ResetY();
-
     public HordsUnitsSpawner(HordSpawnConfig hordConfig, UnitSpawnParameters parameters)
     {
         _config = hordConfig;
@@ -28,8 +26,10 @@ public class HordsUnitsSpawner : IUpdatable, IDisposable
             return;
 
         _timer = 0;
-        _unitSpawner.SpawnUnit(SpawnPosition, _parameters.UnitInitialDirection);
+        _unitSpawner.SpawnUnit(SpawnPosition(), _parameters.UnitInitialDirection);
     }
+
+    private Vector3 SpawnPosition() => _parameters.UnitSpawnPosition + (Random.insideUnitSphere * _parameters.SpawnPositionOffset).ResetY();
 
     public void Dispose() => _unitSpawner.Dispose();
 }

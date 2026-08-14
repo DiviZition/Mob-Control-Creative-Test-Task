@@ -6,6 +6,7 @@ public class UnitRedirectionTrigger : MonoBehaviour
     [SerializeField] private Transform _directionReference;
 
     private Quaternion _rotationDirection;
+    private bool _wasCached = false;
 
     private void OnValidate()
     {
@@ -17,8 +18,11 @@ public class UnitRedirectionTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out IUnitView unit) && unit.BattleSide == _whoToRedirect)
         {
-            if (_rotationDirection == Quaternion.identity)
+            if (_wasCached == false)
+            {
+                _wasCached = true;
                 _rotationDirection = _directionReference.rotation;
+            }
 
             unit.Movement_SetDirection(_rotationDirection);
         }

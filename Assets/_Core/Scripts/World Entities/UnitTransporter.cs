@@ -42,7 +42,7 @@ public class UnitTransporter : MonoBehaviour
         unit.Movement_Lock();
 
         Tween.Position(unit.Transform, _enterPosition.position, duration: 0.5f, ease: Ease.OutCubic);
-        Tween.Delay(duration: 0.3f, () => unit.SetViewEnabled(false));
+        Tween.Delay(duration: 0.3f, () => unit.Disable());
         Tween.Delay(duration: 0.5f, () => ScheduleUnitsOutput(unit));
 
         _tubeEnterFeedback.PlayFeedbacks();
@@ -64,7 +64,7 @@ public class UnitTransporter : MonoBehaviour
         unitView.Movement_SetDirection(_exitPosition.rotation);
         unitView.Movement_UnLock();
 
-        unitView.SetViewEnabled(true);
+        unitView.Enable();
     }
 
     struct ScheduledUnitTracker

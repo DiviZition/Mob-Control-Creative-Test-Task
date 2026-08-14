@@ -50,7 +50,11 @@ public class UnitAttacker : IUnitAttack
         _state = AttackState.Ready;
     }
 
-    public void RegisterNewPossibleTarget(Collider possibleTarget) => _possibleTargets.Add(possibleTarget);
+    public void RegisterNewPossibleTarget(Collider possibleTarget)
+    {
+        _possibleTargets.Add(possibleTarget);
+        Debug.Log(possibleTarget.name);
+    }
     public void RemovePossibleTarget(Collider noLongerPossibleTarget) => _possibleTargets.Remove(noLongerPossibleTarget);
 
     public void UpdateLogic(float deltaTime)
@@ -104,6 +108,8 @@ public class UnitAttacker : IUnitAttack
 
     private void PerformAttack()
     {
+        Debug.Log($"Performing attack with possible targets: {_foundTargets}");
+
         foreach (var target in _foundTargets)
         {
             if (_health.IsDead == true)

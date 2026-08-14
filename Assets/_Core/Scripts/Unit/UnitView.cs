@@ -3,7 +3,10 @@ using UnityEngine;
 
 public interface IUnitView : IDamageable
 {
-    public void SetViewEnabled(bool isEnabled);
+    public int ID { get; }
+
+    public void Enable();
+    public void Disable();
     public void ForceDisableUnit();
 
     public void Movement_SetSpeed(float newSpeed);
@@ -15,6 +18,7 @@ public interface IUnitView : IDamageable
     public IHealth Health_GetHealth();
 }
 
+[SelectionBase]
 [RequireComponent(typeof(UnitAnimations))]
 [RequireComponent(typeof(UnitAttackView))]
 [RequireComponent(typeof(UnitMovementView))]
@@ -30,32 +34,56 @@ public class UnitView : MonoBehaviour, IUnitView
     public bool ReturnsDamage => _unitModel.Config.ReturnsDamage;
     public bool IsDead => _unitModel.Health.IsDead;
 
+    public int ID => _unitModel.ID;
 
     private void OnValidate()
     {
-        Animations = Animations ?? GetComponent<UnitAnimations>();
-        AttackView = AttackView ?? GetComponent<UnitAttackView>();
-        MovementView = MovementView ?? GetComponent<UnitMovementView>();
-        Transform = Transform ?? GetComponent<Transform>();
+        if (Animations == null) Animations = GetComponent<UnitAnimations>();
+        if (AttackView == null) AttackView = GetComponent<UnitAttackView>();
+        if (MovementView == null) MovementView = GetComponent<UnitMovementView>();
+        if (Transform == null) Transform = transform;
     }
 
     public void Init(IUnitModel unitModel)
     {
-        MovementView.Init(unitModel.Movement, Transform);
-        AttackView.Init(unitModel.Attack);
-        Animations.Init(unitModel);
+        _unitModel = unitModel;
+        MovementView.Init(_unitModel.Movement, Transform);
+        AttackView.Init(_unitModel.Attack);
+        Animations.Init(_unitModel);
+
+        _unitModel.OnEnabled += Enable;
+        _unitModel.OnDisabled += Disable;
+    }
+
+
+    private void OnDestroy()
+    {
+        if (_unitModel == null) return;
+
+        _unitModel.OnEnabled -= Enable;
+        _unitModel.OnDisabled -= Disable;
+    }
+
+    public void Enable()
+    {
+        MovementView.Enable();
+        gameObject.SetActive(true);
+    }
+    public void Disable()
+    {
+        MovementView.Disable();
+        gameObject.SetActive(false);
     }
 
     void IDamageable.TakeDamage(int damage) => _unitModel.Health.TakeDamage(damage);
-    public void SetViewEnabled(bool isEnabled) => gameObject.SetActive(isEnabled);
 
-    public void ForceDisableUnit() => _unitModel.ReturnUnitToPool();
+    void IUnitView.ForceDisableUnit() => _unitModel.ReturnUnitToPool();
 
-    public void Movement_Lock() => _unitModel.Movement.Lock();
-    public void Movement_UnLock() => _unitModel.Movement.Unlock();
-    public void Movement_SetPosition(Vector3 newPosition) => _unitModel.Movement.TeleportToPosition(newPosition);
-    public void Movement_SetSpeed(float newSpeed) => _unitModel.Movement.SetNewMoveSpeed(newSpeed);
-    public void Movement_SetDirection(Quaternion newDirection) => _unitModel.Movement.SetDirection(newDirection);
+    void IUnitView.Movement_Lock() => _unitModel.Movement.Lock();
+    void IUnitView.Movement_UnLock() => _unitModel.Movement.Unlock();
+    void IUnitView.Movement_SetPosition(Vector3 newPosition) => _unitModel.Movement.TeleportToPosition(newPosition);
+    void IUnitView.Movement_SetSpeed(float newSpeed) => _unitModel.Movement.SetNewMoveSpeed(newSpeed);
+    void IUnitView.Movement_SetDirection(Quaternion newDirection) => _unitModel.Movement.SetDirection(newDirection);
 
-    public IHealth Health_GetHealth() => _unitModel.Health;
+    IHealth IUnitView.Health_GetHealth() => _unitModel.Health;
 }

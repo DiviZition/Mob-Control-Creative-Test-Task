@@ -16,5 +16,6 @@ MonoBehaviour:
   WheelsRotationSpeed: 1700
   MoveAcceleration: 7
   LocalMoveBounds: 2.35
-  _shootThreashold: 0.1
-  _shootSpread: 0.01
+  ShootThreashold: 0.1
+  ShootSpread: 0.1
+  ShootPositionOffset: {x: 0, y: -0.22, z: 0.71}

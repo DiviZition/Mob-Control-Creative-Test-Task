@@ -2,6 +2,12 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public interface ICanonShooter : IUpdatable
+{
+    public event Action OnCanonShoot;
+    public void ShootWithUnit();
+}
+
 public class CanonShooter : ICanonShooter
 {
     private UnitSpawner _unitSpawner;

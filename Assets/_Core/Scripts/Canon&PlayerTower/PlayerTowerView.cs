@@ -20,7 +20,11 @@ public class PlayerTowerView : MonoBehaviour, IDamageable
         _playerHealth.OnDead += PerformPlayrViewDead;
     }
 
-    private void OnDestroy() => _playerHealth.OnDead -= PerformPlayrViewDead;
+    private void OnDestroy()
+    {
+        if (_playerHealth != null)
+            _playerHealth.OnDead -= PerformPlayrViewDead;
+    }
     public void TakeDamage(int damage) => _playerHealth.TakeDamage(damage);
     
     public void PerformPlayrViewDead()

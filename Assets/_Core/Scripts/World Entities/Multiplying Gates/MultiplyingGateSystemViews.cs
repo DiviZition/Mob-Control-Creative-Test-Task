@@ -19,14 +19,22 @@ public class MultiplyingGateSystemViews : MonoBehaviour
 
         foreach (var upgrade in _gatesUpgrades)
             upgrade.OnUpgradePicked += _gatesSystem.UpgradeAllGates;
+
+        _gatesSystem.OnGatesUpgraded += OnGateUpgraded;
     }
+
+    public void OnGateUpgraded(int gateID, int newValue) => _gatesViews[gateID].OnGateUpgrade(newValue);
 
     private void OnDestroy()
     {
+        if (_gatesSystem == null) return;
+
         foreach (var gate in _gatesViews)
             gate.OnUnitEntered -= _gatesSystem.MultiplyUnits;
 
         foreach (var upgrade in _gatesUpgrades)
             upgrade.OnUpgradePicked -= _gatesSystem.UpgradeAllGates;
+
+        _gatesSystem.OnGatesUpgraded -= OnGateUpgraded;
     }
 }

@@ -6,7 +6,13 @@ public interface IUnitModel : IUpdatable, IDisposable
     public IUnitMovement Movement { get; }
     public IUnitAttack Attack { get; }
     public UnitConfig Config { get; }
+    public int ID { get; }
 
+    public event Action OnEnabled;
+    public event Action OnDisabled;
+
+    public void EnableUnit();
+    public void DisableUnit();
     public void ReturnUnitToPool();
 }
 
@@ -17,22 +23,27 @@ public class UnitBase : IUnitModel
     public UnitConfig Config {  get; private set; }
     public IHealth Health => _health;
 
+    public int ID { get; private set; }
+
     private UnitSpawner _spawner;
     private Health _health;
     private bool IsDisabled;
 
-    public UnitBase(UnitSpawner spawner, Health health, IUnitMovement movement, IUnitAttack attack, UnitConfig config)
+    public event Action OnEnabled;
+    public event Action OnDisabled;
+
+    public UnitBase(UnitSpawner spawner, Health health, IUnitMovement movement, IUnitAttack attack, UnitConfig config, int id)
     {
         _spawner = spawner;
         _health = health;
         Config = config;
         Movement = movement;
         Attack = attack;
+        ID = id;
 
         _health.OnDead += ReturnUnitToPool;
 
         Attack.OnAttackStarted += Movement.Unlock;
-        //Call for the animation when OnAttackStarted fired
         Attack.OnAttackFinished += Movement.Lock;
     }
 
@@ -51,10 +62,10 @@ public class UnitBase : IUnitModel
 
         Movement.ResetToInitialState();
         Movement.ForceRemoveAllLockers();
-        Movement.Lock();
 
         Attack.Enable();
 
+        OnEnabled?.Invoke();
         IsDisabled = false;
     }
 
@@ -62,8 +73,10 @@ public class UnitBase : IUnitModel
     {
         IsDisabled = true;
 
-        Movement.Unlock();
+        Movement.Lock();
         Attack.Disable();
+
+        OnDisabled?.Invoke();
     }
 
     public void ReturnUnitToPool()

@@ -20,7 +20,11 @@ public class HealthBar : MonoBehaviour
     }
 
     private void OnEnable() => SetupHPBar(1, 1);
-    private void OnDestroy() => _health.OnHealthChanged -= SetupHPBar;
+    private void OnDestroy()
+    {
+        if (_health != null)
+            _health.OnHealthChanged -= SetupHPBar;
+    }
 
     void LateUpdate()
     {

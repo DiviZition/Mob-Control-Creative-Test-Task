@@ -7,11 +7,13 @@ public class UnitSpawner : IUpdatable, IDisposable
     private UnitConfig _unitConfig;
     private Transform _unitsContainer;
 
-    private HashSet<UnitBase> _activeUnitsPool = new HashSet<UnitBase>(1024);
-    private Stack<UnitBase> _deactivatedUnitsPool = new Stack<UnitBase>(1024);
+    private HashSet<IUnitModel> _activeUnitsPool = new HashSet<IUnitModel>(1024);
+    private Stack<IUnitModel> _deactivatedUnitsPool = new Stack<IUnitModel>(1024);
 
-    public event Action<UnitBase> OnUnitSpawned;
-    public event Action<UnitBase> OnUnitDespawned;
+    private int _nextUnitsId;
+
+    public event Action<IUnitModel> OnUnitSpawned;
+    public event Action<IUnitModel> OnUnitDespawned;
 
     public UnitSpawner(UnitConfig unitConfig, Transform unitsContainer = null)
     {
@@ -25,24 +27,22 @@ public class UnitSpawner : IUpdatable, IDisposable
             unit.UpdateLogic(deltaTime);
     }
 
-    public UnitBase SpawnUnit(Vector3 position, Quaternion rotation, Action<UnitBase> beforeActivateAction = null)
+    public IUnitModel SpawnUnit(Vector3 position, Quaternion rotation)
     {
-        UnitBase unit = ExtractFreeUnit();
+        IUnitModel unit = ExtractFreeUnit();
 
         unit.Movement.SetDirection(rotation);
         unit.Movement.TeleportToPosition(position);
 
         _activeUnitsPool.Add(unit);
         
-        beforeActivateAction?.Invoke(unit);
-
         unit.EnableUnit();
 
         OnUnitSpawned?.Invoke(unit);
         return unit;
     }
 
-    public void DeactivateUnit(UnitBase unit, bool triggerOnDespawnedEvent = true)
+    public void DeactivateUnit(IUnitModel unit, bool triggerOnDespawnedEvent = true)
     {
         unit.DisableUnit();
         _activeUnitsPool.Remove(unit);
@@ -54,17 +54,17 @@ public class UnitSpawner : IUpdatable, IDisposable
 
     public void KillAllActieveUnits()
     {
-        foreach (UnitBase unit in _activeUnitsPool)
+        foreach (IUnitModel unit in _activeUnitsPool)
             unit.Health.TakeDamage(int.MaxValue);
     }
 
     public void DeactivateAllActieveUnits()
     {
-        foreach (UnitBase unit in _activeUnitsPool)
+        foreach (IUnitModel unit in _activeUnitsPool)
             DeactivateUnit(unit, false);
     }
 
-    private UnitBase ExtractFreeUnit()
+    private IUnitModel ExtractFreeUnit()
     {
         if (_deactivatedUnitsPool.Count <= 0)
             CreateNewUnit();
@@ -79,11 +79,12 @@ public class UnitSpawner : IUpdatable, IDisposable
         IUnitMovement unitMovement = new UnitMovementModel(_unitConfig.MoveSpeed);
         IUnitAttack unitAttack = new UnitAttacker(_unitConfig, unitHealth);
 
-        UnitBase unitBase = new UnitBase(this, unitHealth, unitMovement, unitAttack, _unitConfig);
+        IUnitModel unitBase = new UnitBase(this, unitHealth, unitMovement, unitAttack, _unitConfig, _nextUnitsId);
         unitView.Init(unitBase);
-        unitView.SetViewEnabled(false);
+        unitView.Disable();
         unitBase.DisableUnit();
 
+        _nextUnitsId++;
         _deactivatedUnitsPool.Push(unitBase);
     }
 
