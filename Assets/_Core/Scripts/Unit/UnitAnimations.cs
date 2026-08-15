@@ -11,23 +11,29 @@ public class UnitAnimations : MonoBehaviour
     [SerializeField] private Material _deadMaterial;
     [SerializeField] private SkinnedMeshRenderer _unitMeshRenderer;
 
-    private IUnitModel _unitModel;
+    private IUnitAttack _unitAttack;
+    private bool _playAttackAnimation;
 
-    public void Init(IUnitModel unitModel)
+    public void Init(bool playsAttackAnimation, IUnitAttack unitAttack)
     {
-        _unitModel = unitModel;
+        _unitAttack = unitAttack;
+        _playAttackAnimation = playsAttackAnimation;
         PlayRunAnimation();
 
-        _unitModel.Health.OnDead += PlayDeadAnimation;
-        _unitModel.Attack.OnAttackStarted += PlayAttackAnimation;
-        _unitModel.Attack.OnAttackFinished += PlayRunAnimation;
+        if (_playAttackAnimation)
+        {
+            _unitAttack.OnAttackStarted += PlayAttackAnimation;
+            _unitAttack.OnAttackFinished += PlayRunAnimation;
+        }
     }
 
     private void OnDestroy()
     {
-        _unitModel.Health.OnDead -= PlayDeadAnimation;
-        _unitModel.Attack.OnAttackStarted -= PlayAttackAnimation;
-        _unitModel.Attack.OnAttackFinished -= PlayRunAnimation;
+        if (_playAttackAnimation)
+        {
+            _unitAttack.OnAttackStarted -= PlayAttackAnimation;
+            _unitAttack.OnAttackFinished -= PlayRunAnimation;
+        }
     }
 
     public void PlayRunAnimation()
@@ -42,7 +48,7 @@ public class UnitAnimations : MonoBehaviour
             PlayAnimation(_animations[animDataIndex].StateName);
     }
 
-    public void PlayDeadAnimation()
+    public void PlayDeadAnimation(Action onFinished = null)
     {
         if (TryGetAnimDataIndex(AnimationType.Die, out int animDataIndex) == false)
             return;
@@ -52,8 +58,10 @@ public class UnitAnimations : MonoBehaviour
         var unitTransform = transform;
         float initialYPos = unitTransform.localPosition.y;
         float animDuration = _animations[animDataIndex].DeclaredDuration;
+        float dissapearDuration = _animations[animDataIndex].DeclaredDuration;
         Sequence.Create()
-            .Group(Tween.LocalPositionY(unitTransform, endValue: initialYPos - 0.5f, duration: 5, startDelay: animDuration))
+            .Group(Tween.LocalPositionY(unitTransform, endValue: initialYPos - 0.5f, duration: dissapearDuration, startDelay: animDuration))
+            .ChainCallback(() => onFinished?.Invoke())
             .ChainCallback(() => SetNormalMaterial());
     }
     private void PlayAnimation(string stateName, float transitionDuration = 0.2f) => _animator.CrossFade(stateName, transitionDuration);

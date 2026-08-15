@@ -17,7 +17,7 @@ public interface IUnitAttack : IUpdatable
 public class UnitAttacker : IUnitAttack
 {
     private UnitConfig _unitConfig;
-    private Health _health;
+    private IHealth _health;
 
     private AttackState _state;
     private float _timer;
@@ -32,7 +32,7 @@ public class UnitAttacker : IUnitAttack
     public event Action OnAttackStarted;
     public event Action OnAttackFinished;
 
-    public UnitAttacker(UnitConfig unitConfig, Health health)
+    public UnitAttacker(UnitConfig unitConfig, IHealth health)
     {
         _unitConfig = unitConfig;
         _health = health;
@@ -46,15 +46,12 @@ public class UnitAttacker : IUnitAttack
 
     public void Disable()
     {
+        _possibleTargets.Clear();
         _isDisabled = true;
         _state = AttackState.Ready;
     }
 
-    public void RegisterNewPossibleTarget(Collider possibleTarget)
-    {
-        _possibleTargets.Add(possibleTarget);
-        Debug.Log(possibleTarget.name);
-    }
+    public void RegisterNewPossibleTarget(Collider possibleTarget) => _possibleTargets.Add(possibleTarget);
     public void RemovePossibleTarget(Collider noLongerPossibleTarget) => _possibleTargets.Remove(noLongerPossibleTarget);
 
     public void UpdateLogic(float deltaTime)
@@ -68,6 +65,7 @@ public class UnitAttacker : IUnitAttack
         switch (_state)
         {
             case AttackState.Ready:
+                _foundTargets.Clear();
                 ExtractValidTargetsToList();
                 if (_foundTargets.Count > 0)
                     StartWindUp();
@@ -108,8 +106,6 @@ public class UnitAttacker : IUnitAttack
 
     private void PerformAttack()
     {
-        Debug.Log($"Performing attack with possible targets: {_foundTargets}");
-
         foreach (var target in _foundTargets)
         {
             if (_health.IsDead == true)
@@ -133,14 +129,13 @@ public class UnitAttacker : IUnitAttack
     {
         // How many reflected hits can this unit still survive?
         int maxTargets = Mathf.Max(1, Mathf.CeilToInt(_health.CurrentHealth / (float)_unitConfig.Damage));
-        _foundTargets.Clear();
         foreach (var collider in _possibleTargets)
         {
             if (collider == null)
                 continue;
             
-            if (collider.TryGetComponent(out IDamageable damageable) && 
-                damageable.IsDead && damageable.BattleSide != _unitConfig.BattleSide)
+            if (collider.TryGetComponent(out IDamageable damageable) && damageable.IsDead == false && 
+                damageable.BattleSide != _unitConfig.BattleSide)
             {
                 _foundTargets.Add(damageable);
                 if (_foundTargets.Count >= maxTargets)

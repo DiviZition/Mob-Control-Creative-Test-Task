@@ -9,9 +9,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private TMP_Text _healthCounter;
 
     private Transform _cameraTransform;
-    private IHealth _health;
+    private Health _health;
 
-    public void Init(IHealth health)
+    public void Init(Health health)
     {
         _health = health;
 

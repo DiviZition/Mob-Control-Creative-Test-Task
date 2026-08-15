@@ -10,7 +10,7 @@ public class RoadBlock : MonoBehaviour, IDamageable
     [SerializeField] private MMF_Player _hitFeedback;
     [SerializeField] private HealthCounterView _healthCounter;
 
-    public IHealth Health { get; private set; }
+    public Health Health { get; private set; }
 
     public bool IsDead => Health.IsDead;
     private void OnValidate() => Transform ??= transform;
@@ -19,7 +19,12 @@ public class RoadBlock : MonoBehaviour, IDamageable
     {
         Health = new Health(MaxHealth);
         _healthCounter.Init(Health);
+        Health.OnDead += OnDead;
     }
 
+    private void OnDestroy() => Health.OnDead -= OnDead;
+
     public void TakeDamage(int damage) => Health.TakeDamage(damage);
+
+    private void OnDead() => gameObject.SetActive(false);
 }

@@ -2,17 +2,17 @@ using System;
 
 public interface IUnitModel : IUpdatable, IDisposable
 {
-    public IHealth Health { get; }
+    public Health Health { get; }
     public IUnitMovement Movement { get; }
     public IUnitAttack Attack { get; }
     public UnitConfig Config { get; }
     public int ID { get; }
 
     public event Action OnEnabled;
-    public event Action OnDisabled;
+    public event Action OnDied;
 
     public void EnableUnit();
-    public void DisableUnit();
+    public void DisableUnitLogic();
     public void ReturnUnitToPool();
 }
 
@@ -21,7 +21,7 @@ public class UnitBase : IUnitModel
     public IUnitMovement Movement { get; private set; }
     public IUnitAttack Attack { get; }
     public UnitConfig Config {  get; private set; }
-    public IHealth Health => _health;
+    public Health Health => _health;
 
     public int ID { get; private set; }
 
@@ -30,7 +30,7 @@ public class UnitBase : IUnitModel
     private bool IsDisabled;
 
     public event Action OnEnabled;
-    public event Action OnDisabled;
+    public event Action OnDied;
 
     public UnitBase(UnitSpawner spawner, Health health, IUnitMovement movement, IUnitAttack attack, UnitConfig config, int id)
     {
@@ -41,7 +41,7 @@ public class UnitBase : IUnitModel
         Attack = attack;
         ID = id;
 
-        _health.OnDead += ReturnUnitToPool;
+        _health.OnDead += OnDead;
 
         Attack.OnAttackStarted += Movement.Unlock;
         Attack.OnAttackFinished += Movement.Lock;
@@ -69,19 +69,23 @@ public class UnitBase : IUnitModel
         IsDisabled = false;
     }
 
-    public void DisableUnit()
+    public void DisableUnitLogic()
     {
         IsDisabled = true;
 
         Movement.Lock();
         Attack.Disable();
+    }
 
-        OnDisabled?.Invoke();
+    private void OnDead()
+    {
+        DisableUnitLogic();
+        OnDied?.Invoke();
     }
 
     public void ReturnUnitToPool()
     {
-        DisableUnit();
+        DisableUnitLogic();
         _spawner.DeactivateUnit(this);
     }
 

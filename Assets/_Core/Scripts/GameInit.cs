@@ -22,8 +22,8 @@ public class GameInit : MonoBehaviour, IDisposable
     private List<IDisposable> _disposables = new(8);
 
     public UnitSpawner PlayerUnitSpawner { get; private set; }
-    private IHealth _playerHealth;
-    private IHealth _enemyHealth;
+    private Health _playerHealth;
+    private Health _enemyHealth;
 
     [RuntimeInitializeOnLoadMethod]
     public static void RunTimeInitialization()
@@ -58,7 +58,7 @@ public class GameInit : MonoBehaviour, IDisposable
         _enemyHealth = new Health(100);
         EnemyTowerModel enemyTowerModel = new EnemyTowerModel(_enemyHealth, _enemyTowerView.EnemyConfigs, _enemyTowerView.GetSpawnParameters());
         _enemyTowerView.Init(enemyTowerModel);
-        //_updater.Register(enemyTowerModel);
+        _updater.Register(enemyTowerModel);
         _disposables.Add(enemyTowerModel);
 
         MultiplyingGateSystem multiplyingGateSystem = new MultiplyingGateSystem(playerUnitSpawner);

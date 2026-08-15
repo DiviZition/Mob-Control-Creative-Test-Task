@@ -2,16 +2,16 @@ using System;
 
 public interface IEnemyTowerModel : IUpdatable, IDisposable
 {
-    public IHealth Health { get; }
+    public Health Health { get; }
 }
 
 public class EnemyTowerModel : IEnemyTowerModel
 {
     private HordsUnitsSpawner[] _hordsToSpawn;
     private readonly HordSpawnConfig[] _hordsConfigs;
-    public IHealth Health { get; private set; }
+    public Health Health { get; private set; }
 
-    public EnemyTowerModel(IHealth health, HordSpawnConfig[] hordsConfigs, UnitSpawnParameters spawnParameters)
+    public EnemyTowerModel(Health health, HordSpawnConfig[] hordsConfigs, UnitSpawnParameters spawnParameters)
     {
         Health = health;
         _hordsConfigs = hordsConfigs;

@@ -15,7 +15,7 @@ public interface IUnitView : IDamageable
     public void Movement_Lock();
     public void Movement_UnLock();
 
-    public IHealth Health_GetHealth();
+    public Health Health_GetHealth();
 }
 
 [SelectionBase]
@@ -49,10 +49,10 @@ public class UnitView : MonoBehaviour, IUnitView
         _unitModel = unitModel;
         MovementView.Init(_unitModel.Movement, Transform);
         AttackView.Init(_unitModel.Attack);
-        Animations.Init(_unitModel);
+        Animations.Init(_unitModel.Config.PlayAttackAnimation, _unitModel.Attack);
 
         _unitModel.OnEnabled += Enable;
-        _unitModel.OnDisabled += Disable;
+        _unitModel.OnDied += OnUnitDied;
     }
 
 
@@ -61,7 +61,18 @@ public class UnitView : MonoBehaviour, IUnitView
         if (_unitModel == null) return;
 
         _unitModel.OnEnabled -= Enable;
-        _unitModel.OnDisabled -= Disable;
+        _unitModel.OnDied -= OnUnitDied;
+    }
+
+    private void OnUnitDied()
+    {
+        Action unpoolModelAndDisableView = () =>
+        {
+            _unitModel.ReturnUnitToPool();
+            Disable();
+        };
+
+        Animations.PlayDeadAnimation(unpoolModelAndDisableView);
     }
 
     public void Enable()
@@ -85,5 +96,5 @@ public class UnitView : MonoBehaviour, IUnitView
     void IUnitView.Movement_SetSpeed(float newSpeed) => _unitModel.Movement.SetNewMoveSpeed(newSpeed);
     void IUnitView.Movement_SetDirection(Quaternion newDirection) => _unitModel.Movement.SetDirection(newDirection);
 
-    IHealth IUnitView.Health_GetHealth() => _unitModel.Health;
+    Health IUnitView.Health_GetHealth() => _unitModel.Health;
 }

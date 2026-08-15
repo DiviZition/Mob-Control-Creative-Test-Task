@@ -9,11 +9,11 @@ public class PlayerTowerView : MonoBehaviour, IDamageable
     [field: SerializeField] public bool ReturnsDamage {  get; private set; }
     [field: SerializeField] public MMF_Player CanonHitFeedback { get; private set; }
 
-    private IHealth _playerHealth;
+    private Health _playerHealth;
     public UnitBattleSide BattleSide => UnitBattleSide.Player;
     public bool IsDead => _playerHealth.IsDead;
 
-    public void Init(IHealth playerHealth)
+    public void Init(Health playerHealth)
     {
         _playerHealth = playerHealth;
 

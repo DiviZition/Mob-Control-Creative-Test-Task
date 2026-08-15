@@ -4,9 +4,9 @@ using UnityEngine;
 public class HealthCounterView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _counterText;
-    private IHealth _health;
+    private Health _health;
 
-    public void Init(IHealth health)
+    public void Init(Health health)
     {
         _health = health;
         _health.OnHealthChanged += CounterUpdateRetranslate;
